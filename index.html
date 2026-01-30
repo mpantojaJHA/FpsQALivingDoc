@@ -27,7 +27,7 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            max-width: 600px;
+            max-width: 900px;
             padding: 60px;
             text-align: center;
         }
@@ -47,28 +47,37 @@
 
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
             margin-bottom: 40px;
         }
 
         .btn {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 16px 30px;
-            border-radius: 8px;
+            padding: 20px 15px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            font-size: 0.875rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
             text-align: center;
+            min-height: 100px;
+        }
+
+        .btn-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
         }
 
         .features {
@@ -108,11 +117,26 @@
         <h1>📚 Living Documentation</h1>
         <p>Stay up-to-date with our comprehensive and always-current documentation.</p>
         <div class="button-grid">
-            <a href="Livingdoc/ALM/LivingDocALM.html" class="btn">ALM</a>
-            <a href="Livingdoc/CECL/LivingDocCECL.html" class="btn">CECL</a>
-            <a href="Livingdoc/CustomerPricing/LivingDocPricing.html" class="btn">Customer Pricing</a>
-            <a href="Livingdoc/CustomerProfitability/LivingDocProfitability.html" class="btn">Customer Profitability</a>
-            <a href="Livingdoc/HomePageWidgets/LivingDocHome.html" class="btn">Home Page/Widgets</a>
+            <a href="Livingdoc/ALM/LivingDocALM.html" class="btn">
+                <span class="btn-icon">📊</span>
+                <span>ALM</span>
+            </a>
+            <a href="Livingdoc/CECL/LivingDocCECL.html" class="btn">
+                <span class="btn-icon">💼</span>
+                <span>CECL</span>
+            </a>
+            <a href="Livingdoc/CustomerPricing/LivingDocPricing.html" class="btn">
+                <span class="btn-icon">💰</span>
+                <span>Customer Pricing</span>
+            </a>
+            <a href="Livingdoc/CustomerProfitability/LivingDocProfitability.html" class="btn">
+                <span class="btn-icon">📈</span>
+                <span>Customer Profitability</span>
+            </a>
+            <a href="Livingdoc/HomePageWidgets/LivingDocHome.html" class="btn">
+                <span class="btn-icon">🏠</span>
+                <span>Home Page/Widgets</span>
+            </a>
         </div>
         <div class="features">
             <h3>Produced from ReqNRoll - Expressium</h3>
