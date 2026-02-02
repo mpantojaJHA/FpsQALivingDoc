@@ -161,11 +161,22 @@
             // Standalone page
             document.body.classList.add('standalone');
         } else {
-            // In a widget/iframe - add target to links
+            // In a widget/iframe - handle links to break out of iframe
             document.addEventListener('DOMContentLoaded', function() {
                 const links = document.querySelectorAll('a.btn');
                 links.forEach(link => {
-                    link.setAttribute('target', '_top');
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const href = this.getAttribute('href');
+                        // Try multiple methods to navigate out of iframe
+                        if (window.top) {
+                            window.top.location.href = href;
+                        } else if (window.parent) {
+                            window.parent.location.href = href;
+                        } else {
+                            window.location.href = href;
+                        }
+                    });
                 });
             });
         }
