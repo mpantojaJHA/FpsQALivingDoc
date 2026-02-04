@@ -1,0 +1,3517 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!-- Expressium LivingDoc Version: 1.1.8.0 -->
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Expressium LivingDoc</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+		<style>
+    @property --passed-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #48A84F;
+    }
+
+    @property --incomplete-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #F5BB00;
+    }
+
+    @property --failed-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #EB4431;
+    }
+
+    @property --skipped-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #A9A9A9;
+    }
+
+    @property --total-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: black;
+    }
+
+    @property --passed-background-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #E5F4E6;
+    }
+
+    @property --incomplete-background-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #FFF6D6;
+    }
+
+    @property --failed-background-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #FBE6E3;
+    }
+
+    @property --skipped-background-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #F0F0F0;
+    }
+
+    @property --passed-text-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #2B672F;
+    }
+
+    @property --incomplete-text-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #7A5E00;
+    }
+
+    @property --failed-text-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #99271E;
+    }
+
+    @property --skipped-text-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #000000;
+    }
+
+    @property --keyword-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #2F6795;
+        initial-value: #2D638F;
+    }
+
+    @property --hover-color {
+        syntax: "<color>";
+        inherits: false;
+        initial-value: #C7D9E9;
+        initial-value: #d9e5f0;
+    }
+  
+    body, html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        /* font-family: system-ui, "Segoe UI Variable Small", "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+    }
+
+    #content-wrapper {
+        display: flex;
+        height: calc(100% - 156px); /* Adjust for header and footer height */
+        flex-direction: row; /* Change to row for vertical splitter */
+    }
+
+    #splitter {
+        width: 2px;
+        background: #ddd;
+        cursor: col-resize;
+    }
+
+    #left-section {
+        flex: 1;
+        overflow: hidden;
+        scrollbar-color: #909090 #F8F9FA;
+    }
+
+    #right-section {
+        flex: 1;
+        overflow: auto;
+        scrollbar-color: #909090 #F8F9FA;
+    }
+
+    #list-view {
+        flex: 1;
+        overflow: auto;
+        height: calc(100% - 68px); /* Adjust for filter and search height */
+    }
+
+    header {
+        padding: 8px;
+        padding-left: 16px;
+        background-color: #C7D9E9;
+    }
+
+    footer {
+        background-color: #f1f1f1;
+        color: #555;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.875em;
+    }
+
+    .navigation {
+        background-color: #787878;
+        color: white;
+        padding: 8px 16px;
+    }
+
+    a.navigation-link {
+        color: white;
+        position: relative;
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+
+    a.navigation-active {
+        font-weight: 600;
+        font-size: 1.0625em;
+    }
+
+    .section {
+        padding-bottom: 8px;
+    }
+
+    .layout-row {
+        display: flex;
+        width: 100%;
+    }
+
+    .layout-column {
+        flex: auto;
+    }
+
+    .align-left {
+        text-align: left;
+    }
+
+    .align-center {
+        text-align: center;
+    }
+
+    .align-right {
+        text-align: right;
+    }
+
+    .filter-group {
+        background-color: #f1f1f1;
+        padding: 8px;
+        align-items: center;
+    }
+
+    .filter-group-text {
+        padding-left: 4px;
+        padding-right: 4px;
+        color: gray;
+    }
+
+    .filter-group-input {
+        width: 100%;
+        box-sizing: border-box;
+        border-width: 1px;
+        outline: none;
+        background-color: #f1f1f1;
+        border: hidden;
+    }
+
+    th, td {
+        padding-left: 4px;
+        padding-right: 4px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    th {
+        background-color: #787878;
+        color: white;
+        border: solid;
+        border-width: 1px;
+        font-weight: 600;
+    }
+
+    table.grid-view,
+    table.tree-view {
+        border: 1px;
+        width: 100%;
+    }
+
+    table.grid-view tr:hover,
+    table.tree-view tr:hover {
+        background-color: var(--hover-color);
+    }
+
+    table.grid-view th,
+    table.grid-view td {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    table.tree-view th,
+    table.tree-view td {
+        padding-left: 2px;
+        padding-right: 4px;
+    }
+
+    .grid-folder {
+        font-size: 0.9375em;
+        padding: 2px;
+        text-align: center;
+    }
+
+    button {
+        border: 1px solid black;
+        color: black;
+    }
+
+    button.prefilter {
+        border: 1px solid gray;
+        color: gray;
+    }
+
+    button.prefilter:hover {
+        border: 1px solid black;
+        color: black;
+        background-color: var(--hover-color);
+    }
+
+    button.prefilter.active {
+        border: 1px solid black;
+        color: black;
+        background-color: var(--hover-color);
+    }
+
+    .grid-option {
+        color: dimgray;
+    }
+
+    .gridline {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .gridline-folder {
+        color: dimgray;
+        font-weight: bold;
+    }
+
+    .gridline-heading {
+        color: dimgray;
+        font-weight: bold;
+    }
+
+    .gridline-toggle {
+        color: dimgray;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .project-name {
+        font-size: 1.40em;
+        font-weight: bold;
+    }
+
+    .project-date {
+        color: dimgray;
+        padding-left: 2px;
+    }
+
+    .page-name {
+        font-size: 1.40em;
+        font-weight: bold;
+        line-height: 1;
+        color: dimgray;
+    }
+
+    .chart-outline {
+        width: fit-content;
+        margin: auto;
+        padding: 16px;
+        padding-left: 24px;
+        padding-right: 24px;
+        background-color: whitesmoke;
+    }
+
+    .chart-name {
+        font-size: 1.25em;
+        font-weight: bold;
+        line-height: 1;
+        color: dimgray;
+    }
+
+    .chart-percentage {
+        font-size: 2.25em;
+        line-height: 1.0;
+    }
+
+    .chart-status {
+        font-size: 2em;
+        color: gray;
+        line-height: 1.0;
+    }
+
+    .chart-bar {
+        height: 0.8em;
+        float: left
+    }
+
+    .chart-count {
+        text-align: center;
+    }
+
+    .chart-count-number {
+        font-size: 1.25em;
+        line-height: 1.0;
+    }
+
+    .chart-count-percentage {
+        font-size: 1.125em;
+        line-height: 1.0;
+    }
+
+    .chart-count-status {
+        font-size: 1.125em;
+        line-height: 1.0;
+    }
+
+    .chart-count-bar {
+        width: 110px;
+        height: 0.4em;
+    }
+
+    data-item {
+        visibility: hidden;
+    }
+
+    a {
+        color: var(--keyword-color);
+        text-decoration: none;
+    }
+
+    .color-passed {
+        color: var(--passed-color);
+    }
+
+    .bgcolor-passed {
+        background: var(--passed-color);
+    }
+
+    .color-incomplete {
+        color: var(--incomplete-color);
+    }
+
+    .bgcolor-incomplete {
+        background: var(--incomplete-color);
+    }
+
+    .color-failed {
+        color: var(--failed-color);
+    }
+
+    .bgcolor-failed {
+        background: var(--failed-color);
+    }
+
+    .color-skipped {
+        color: var(--skipped-color);
+    }
+
+    .bgcolor-skipped {
+        background: var(--skipped-color);
+    }
+
+    .bgcolor-total {
+        background: var(--total-color);
+    }
+
+    .status-dot {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: 2px;
+        margin-right: 2px;
+    }
+
+    .sort-column {
+        float: right;
+        font-weight: normal;
+    }
+
+    ul {
+        list-style-type: none;
+        margin-bottom: 0px;
+    }
+
+    .chart-text {
+        transform: translateY(0.15em);
+    }
+
+    .chart-number {
+        font-size: 0.5em;
+        text-anchor: middle;
+        transform: translateY(-0.25em);
+    }
+
+    .chart-label {
+        font-size: 0.3em;
+        text-anchor: middle;
+        transform: translateY(0.7em);
+    }
+
+    .donut-segment-passed {
+        stroke: var(--passed-color);
+        fill: transparent;
+        stroke-width: 3.2px;
+    }
+
+    .donut-segment-incomplete {
+        stroke: var(--incomplete-color);
+        fill: transparent;
+        stroke-width: 3.2px;
+    }
+
+    .donut-segment-failed {
+        stroke: var(--failed-color);
+        fill: transparent;
+        stroke-width: 3.2px;
+    }
+
+    .donut-segment-skipped {
+        stroke: var(--skipped-color);
+        fill: transparent;
+        stroke-width: 3.2px;
+    }
+
+    textarea {
+        resize: none;
+        width: 100%;
+        padding: 8px;
+        border: 1px solid dimgray;
+    }
+
+    textarea:focus {
+        border-color: black;
+        outline: none;
+    }
+
+    hr {
+        border: 0 none;
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+    .circle-number {
+        width: 1.5em;
+        height: 1.5em;
+        border-radius: 50%;
+        background-color: #909090;
+        color: white;
+        text-align: center;
+        line-height: 1.5em; /* Centers the text vertically */
+        font-size: 0.875em;
+        display: inline-block; /* Allows the circle to be displayed inline */
+        margin-left: 2px;
+    }
+
+    .feature-tags,
+    .rule-tags,
+    .scenario-tags {
+        color: #348F91;
+    }
+
+    .feature-keyword,
+    .background-keyword,
+    .rule-keyword,
+    .scenario-keyword {
+        color: var(--keyword-color);
+        font-weight: bold;
+    }
+
+    .feature-name,
+    .rule-name,
+    .scenario-name {
+        font-weight: bold;
+    }
+
+    .feature-description,
+    .rule-description {
+        font-family: Consolas;
+        font-size: 0.875em;
+        color: gray;
+        font-style: italic;
+        padding-top: 2px;
+    }
+
+    .feature-duration,
+    .scenario-duration {
+        color: gray;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .scenario-stacktraces,
+    .scenario-attachments {
+        color: dimgray;
+        /* padding: 2px; */
+        /* background-color: #F0F0F0; */
+        /* text-align: center; */
+        /* border-radius: 4px;  */
+        /* border: 1px solid lightgray; */
+    }
+
+    .step-marker {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .step-keyword {
+        color: var(--keyword-color);
+        font-weight: bold;
+    }
+
+    .scenario-steps {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    ul.scenario-steps li {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+
+    .steps-datatable {
+        padding-left: 32px;
+    }
+
+    .scenario-datatable {
+        color: dimgray;
+    }
+
+    table.scenario-datatable td {
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .message-box {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 2px;
+        padding-right: 2px;
+        max-width: inherit;
+        word-wrap: break-word;
+    }
+
+    .message-passed {
+        color: var(--passed-text-color);
+        background-color: var(--passed-background-color);
+        padding: 8px;
+        border-left: 8px solid var(--passed-color);
+    }
+
+    .message-failed {
+        color: var(--failed-text-color);
+        background-color: var(--failed-background-color);
+        padding: 8px;
+        border-left: 8px solid var(--failed-color);
+    }
+
+    .message-incomplete {
+        color: var(--incomplete-text-color);
+        background-color: var(--incomplete-background-color);
+        padding: 8px;
+        border-left: 8px solid var(--incomplete-color);
+    }
+
+    .message-skipped {
+        color: var(--skipped-text-color);
+        background-color: var(--skipped-background-color);
+        padding: 8px;
+        border-left: 8px solid var(--skipped-color);
+    }
+
+    .message-stacktrace {
+        font-size: 0.875em;
+    }
+
+    .examples-keyword {
+        font-weight: bold;
+        color: gray;
+        padding-left: 16px;
+    }
+
+    .examples-datatable {
+        padding-left: 32px;
+    }
+
+    .attachments {
+        padding-top: 4px;
+    }
+
+    .attachments-keyword {
+        font-weight: bold;
+        color: gray;
+        padding-left: 16px;
+    }
+
+    ul.attachments-files li {
+        padding-top: 1px;
+        padding-bottom: 1px;
+    }
+
+    #script-view {
+        flex: 1;
+        overflow: auto;
+        height: calc(100% - 334px); /* Adjust for filter and search height */
+    }
+
+    #scenario-script {
+        field-sizing: content;
+        height: 96%;
+    }
+
+		</style>
+		<script>
+        function loadScenario(x) {
+            var featureId = x.getAttribute('data-featureid');
+            var scenarioId = x.getAttribute('data-scenarioid');
+            var feature = document.getElementById(featureId).innerHTML;
+            var scenario = document.getElementById(scenarioId).innerHTML;
+
+            document.getElementById('right-section').innerHTML = feature + scenario;
+        }
+    
+		</script>
+		<script>
+        function loadFeature(x) {
+            var featureId = x.getAttribute('data-featureid');
+            var feature = document.getElementById(featureId).innerHTML;
+            var table = document.getElementById("project-view");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "scenario") {
+                    var parentId = tr[i].getAttribute('data-featureid');
+                    if (featureId == parentId) {
+                        var scenarioId = tr[i].getAttribute('data-scenarioid');
+                        feature = feature.concat(document.getElementById(scenarioId).innerHTML);
+                    }
+                }
+            }
+
+            document.getElementById('right-section').innerHTML = feature;
+
+            var rules = document.getElementById('right-section').querySelectorAll('[data-rule-replica]');
+            for (var i = 0; i < rules.length; i++)
+                rules[i].style.display = "none";
+        }
+    
+		</script>
+		<script>
+        function loadViewMode(x, y) {
+            var listview = document.getElementById(x).innerHTML;
+
+            document.getElementById('list-view').innerHTML = listview;
+
+            var exists = document.getElementById('view-title');
+            if (exists)
+                document.getElementById('view-title').innerHTML = y;
+
+            var navLinks = document.querySelectorAll('.navigation-link');
+            for (var i = 0; i < navLinks.length; i++) {
+                if (navLinks[i].textContent == y)
+                    navLinks[i].classList.add('navigation-active');
+                else
+                    navLinks[i].classList.remove('navigation-active');
+            }
+
+            filterView();
+            loadAnalytics();
+        }
+    
+		</script>
+		<script>
+        function loadAnalytics() {
+            var navLinkActive = document.querySelectorAll('a.navigation-link.navigation-active');
+            if (navLinkActive.length > 0) {
+                var name = navLinkActive[0].textContent.toLowerCase();
+
+                if (name == "overview") {
+                    var analytics = document.getElementById("analytics-scenarios").innerHTML;
+                    document.getElementById('right-section').innerHTML = analytics;
+                } else {
+                    var analytics = document.getElementById("analytics-" + name).innerHTML;
+                    document.getElementById('right-section').innerHTML = analytics;
+                }
+            }
+            else {
+                var analytics = document.getElementById("analytics-scenarios").innerHTML;
+                document.getElementById('right-section').innerHTML = analytics;
+            }
+        }
+    
+		</script>
+		<script>
+        function filterView() {
+            var navLinkActive = document.querySelectorAll('a.navigation-link.navigation-active');
+            if (navLinkActive.length > 0) {
+                name = navLinkActive[0].textContent.toLowerCase();
+
+                if (name == "overview") {
+                    filterDataByRole("scenario");
+                    filterDataFeatures();
+                    filterDataFolders();
+                }
+                else if (name == "features") {
+                    filterDataByRole("feature");
+                }
+                else if (name == "scenarios") {
+                    filterDataByRole("scenario");
+                }
+                else if (name == "steps") {
+                    filterDataByRole("step");
+                }
+                else {
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function filterDataByRole(roleType) {
+            var input = document.getElementById("filter-by-keywords");
+            var filterTokens = input.value.toUpperCase().split(/\s+/);
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            var statuses = [];
+            var prefilters = document.getElementsByTagName("button");
+            for (var i = 0; i < prefilters.length; i++) {
+                var prefilter = prefilters[i].getAttribute("data-prefilter");
+                var active = prefilters[i].className.includes(" active");
+                if (active) {
+                    statuses.push(prefilter);
+                }
+            }
+
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+                var tags = tr[i].getAttribute("data-tags");
+                var td = tr[i].getElementsByTagName("td");
+                var rowText = "";
+                var found = false;
+
+                if (role == null)
+                    continue;
+
+                if (role != roleType)
+                    continue;
+
+                for (var j = 0; j < td.length; j++) {
+                    rowText += td[j].textContent.toUpperCase() + " ";
+                }
+
+                var tagTokens = tags.toUpperCase().split(/\s+/);
+                for (var t = 0; t < tagTokens.length; t++) {
+                    rowText += tagTokens[t].toUpperCase() + " ";
+                }
+
+                found = filterTokens.every(token => rowText.includes(token));
+
+                var hasPrefilter = false;
+                for (var t = 0; t < statuses.length; t++) {
+                    var prefilter = statuses[t];
+                    if (rowText.includes(prefilter.toUpperCase())) {
+                        hasPrefilter = true;
+                    }
+                }
+
+                if (statuses.length > 0 && !hasPrefilter) {
+                    found = false;
+                }
+
+                tr[i].style.display = found ? "" : "none";
+            }
+        }
+    
+		</script>
+		<script>
+        function filterDataFeatures() {
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            // Hide all features first
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "feature")
+                    tr[i].style.display = "none";
+            }
+
+            var features = [];
+
+            // Collect all features that have visible scenarios
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "scenario") {
+                    if (tr[i].style.display == "") {
+                        var parent = tr[i].getAttribute("data-parent");
+                        features.push(parent);
+                    }
+                }
+            }
+
+            // Show features that have visible scenarios
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "feature") {
+                    var name = tr[i].getAttribute("data-name");
+                    if (features.includes(name))
+                        tr[i].style.display = "";
+                }
+            }
+
+            // Collapse scenarios under features if the feature is collapsed
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+                if (role == "feature") {
+                    if (tr[i].style.display == "") {
+                        var featureId = tr[i].getAttribute('data-featureid');
+                        var collapse = tr[i].getAttribute('data-collapse');
+                        if (collapse == "true") {
+                            for (var g = 0; g < tr.length; g++) {
+                                var scenarioRole = tr[g].getAttribute("data-role");
+                                if (scenarioRole == "scenario") {
+                                    var featureIdSlave = tr[g].getAttribute('data-featureid');
+                                    if (featureId == featureIdSlave) {
+                                        tr[g].style.display = "none";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function filterDataFolders() {
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            var features = table.querySelectorAll('[data-role="feature"]');
+
+            // Display all folder first and reset attributes
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "folder") {
+                    tr[i].style.display = "";
+                    tr[i].setAttribute('has-folders', 'false');
+                    tr[i].setAttribute('has-features', 'false');
+                }
+            }
+
+            var foldersDataParents = [];
+
+            // Collect all folders that have visible features
+            for (var i = 0; i < features.length; i++) {
+                if (features[i].style.display == "") {
+                    var parent = features[i].getAttribute("data-parent");
+                    foldersDataParents.push(parent);
+                }
+            }
+
+            // Set folders that have visible features
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "folder") {
+                    var name = tr[i].getAttribute("data-name");
+                    if (foldersDataParents.includes(name))
+                        tr[i].setAttribute('has-features', 'true');
+                }
+            }
+
+            // Set folders that have subsequent folders
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "folder") {
+                    var folderPath = tr[i].getAttribute('data-name');
+
+                    for (var s = 0; s < tr.length; s++) {
+                        var srole = tr[s].getAttribute("data-role");
+
+                        if (srole == "folder") {
+                            var sfolderPath = tr[s].getAttribute('data-name');
+                            if (sfolderPath != folderPath) {
+                                if (sfolderPath.startsWith(folderPath)) {
+                                    tr[i].setAttribute('has-folders', 'true');
+                                }
+                            }
+                        }                       
+                    }
+                }
+            }
+
+            // Hide folders that have invisible folders and features
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "folder") {
+                    var hasFolders = tr[i].getAttribute('has-folders');
+                    var hasFeatures = tr[i].getAttribute('has-features');
+                    if (hasFolders == "false" && hasFeatures == "false")
+                        tr[i].style.display = "none";
+                }
+            }
+
+            // Hide folders that have no visible subfolders
+            filterSubFolder(tr);
+            filterSubFolder(tr);
+        }
+    
+		</script>
+		<script>
+        function filterSubFolder(tr) {
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+                if (role == "folder") {
+                    var hasFolders = tr[i].getAttribute('has-folders');
+                    var hasFeatures = tr[i].getAttribute('has-features');
+                    if (hasFolders == "true" && hasFeatures == "false") {
+                        var folderPath = tr[i].getAttribute('data-name');
+
+                        var hasVisibleSubfolders = false;
+
+                        for (var s = 0; s < tr.length; s++) {
+                            var srole = tr[s].getAttribute("data-role");
+                            if (srole == "folder") {
+                                var sfolderPath = tr[s].getAttribute('data-name');
+                                if (sfolderPath != folderPath) {
+                                    if (sfolderPath.startsWith(folderPath)) {
+                                        if (tr[s].style.display == "") {
+                                            hasVisibleSubfolders = true;
+                                        }
+                                    }
+                                }
+                            }                       
+                        }
+
+                        if (!hasVisibleSubfolders) {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function sortTableByColumn(n) {
+            var table = document.getElementById("table-grid");
+            var count = 0;
+            var switching = true;
+            var direction = "ascending";
+
+            while (switching) {
+                switching = false;
+                var rows = table.rows;
+
+                for (var i = 1; i < (rows.length - 1); i++) {
+                    var Switch = false;
+
+                    var x = rows[i].getElementsByTagName("td")[n];
+                    var y = rows[i + 1].getElementsByTagName("td")[n];
+
+                    if (direction == "ascending") {
+
+                        if (x.innerHTML.toLowerCase() >
+                            y.innerHTML.toLowerCase()) {
+
+                            Switch = true;
+                            break;
+                        }
+                    } else if (direction == "descending") {
+
+                        if (x.innerHTML.toLowerCase() <
+                            y.innerHTML.toLowerCase()) {
+
+                            Switch = true;
+                            break;
+                        }
+                    }
+                }
+                if (Switch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+
+                    count++;
+                } else {
+                    if (count == 0 && direction == "ascending") {
+                        direction = "descending";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function sortTableByColumnByAttibute(n, a) {
+            var table = document.getElementById("table-grid");
+            var count = 0;
+            var switching = true;
+
+            var direction = "ascending";
+
+            while (switching) {
+                switching = false;
+                var rows = table.rows;
+
+                for (var i = 1; i < (rows.length - 1); i++) {
+                    var Switch = false;
+
+                    var x = rows[i].getElementsByTagName("td")[n];
+                    var y = rows[i + 1].getElementsByTagName("td")[n];
+
+                    if (direction == "ascending") {
+
+                        if (x.getAttribute(a) >
+                            y.getAttribute(a)) {
+
+                            Switch = true;
+                            break;
+                        }
+                    } else if (direction == "descending") {
+
+                        if (x.getAttribute(a) <
+                            y.getAttribute(a)) {
+
+                            Switch = true;
+                            break;
+                        }
+                    }
+                }
+                if (Switch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+
+                    count++;
+                } else {
+                    if (count == 0 && direction == "ascending") {
+                        direction = "descending";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function loadEditor() {
+            var editor = document.getElementById('editor-view').innerHTML;
+
+            document.getElementById('left-section').innerHTML = editor;
+            document.getElementById('right-section').remove();
+
+            document.getElementById("scenario-script").value = "";
+            document.getElementById("scenario-script").value += "@TA-??? @Review";
+            document.getElementById("scenario-script").value += "\nScenario: Successfully Creating a new Gherkin Script";
+
+            filterStepDefinitions();
+
+            var navLinks = document.querySelectorAll('.navigation-link');
+            for (var i = 0; i < navLinks.length; i++) {
+                if (navLinks[i].textContent == "Editor")
+                    navLinks[i].classList.add('navigation-active');
+                else
+                    navLinks[i].classList.remove('navigation-active');
+            }
+        }
+    
+		</script>
+		<script>
+        function filterStepDefinitions() {
+            var input = document.getElementById("stepdefinition-filter");
+            var filterTokens = input.value.toUpperCase().split(/\s+/);
+            var table = document.getElementById("steps-table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            var numberOfFound = 0;
+
+            for (var i = 0; i < tr.length; i++) {
+                var td = tr[i].getElementsByTagName("td");
+                var rowText = "";
+                var found = false;
+
+                for (var j = 0; j < td.length; j++) {
+                    rowText += td[j].textContent.toUpperCase() + " ";
+                }
+
+                found = filterTokens.every(token => rowText.includes(token));
+
+                if (found)
+                    numberOfFound++;
+
+                if (numberOfFound >= 6)
+                    found = false;
+
+                tr[i].style.display = found ? "" : "none";
+            }
+        }
+    
+		</script>
+		<script>
+        function loadStepDefinition(row) {
+            var link = row.querySelector("td a");
+            var linkText = link.textContent || link.innerText;
+
+            var script = document.getElementById("scenario-script").value;
+            if (script.endsWith("\n") || script === "") {
+                document.getElementById("scenario-script").value += "    " + linkText;
+            } else {
+                document.getElementById("scenario-script").value += "\n    " + linkText;
+            }
+
+            document.getElementById("stepdefinition-filter").value = "";
+            filterStepDefinitions();
+        }
+    
+		</script>
+		<script>
+        function loadStepDefinitionByEnter() {
+            var table = document.getElementById("steps-table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 0; i < tr.length; i++) {
+                if (tr[i].style.display == "") {
+                    loadStepDefinition(tr[i]);
+                    break;
+                }
+            }
+
+            document.getElementById("stepdefinition-filter").value = "";
+        }
+    
+		</script>
+		<script>
+        function editorCopy() {
+            var copyText = document.getElementById("scenario-script");
+            navigator.clipboard.writeText(copyText.value);
+        }
+    
+		</script>
+		<script>
+        function loadCollapse(x) {
+            var collapse = x.getAttribute('data-collapse');
+            var parent = x.parentElement;
+
+            if (collapse == "false") {
+                x.innerHTML = "<span class='bi bi-chevron-right'></span>";
+                x.setAttribute('data-collapse', 'true');
+                parent.setAttribute('data-collapse', 'true');
+            } else {
+                x.innerHTML = "<span class='bi bi-chevron-down'></span>";
+                x.setAttribute('data-collapse', 'false');
+                parent.setAttribute('data-collapse', 'false');
+            }
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function loadCollapseAll() {
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "feature") {
+                    var cells = tr[i].getElementsByTagName("td");
+
+                    for (var a = 0; a < cells.length; a++) {
+                        var collapse = cells[a].getAttribute('data-collapse');
+
+                        if (collapse == "false") {
+                            cells[a].innerHTML = "<span class='bi bi-chevron-right'></span>";
+                            cells[a].setAttribute('data-collapse', 'true');
+                            tr[i].setAttribute('data-collapse', 'true');
+                        }
+                    }
+                }
+            }
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function loadExpandAll() {
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+
+            for (var i = 0; i < tr.length; i++) {
+                var role = tr[i].getAttribute("data-role");
+
+                if (role == "feature") {
+                    var cells = tr[i].getElementsByTagName("td");
+
+                    for (var a = 0; a < cells.length; a++) {
+                        var collapse = cells[a].getAttribute('data-collapse');
+
+                        if (collapse == "true") {
+                            cells[a].innerHTML = "<span class='bi bi-chevron-down'></span>";
+                            cells[a].setAttribute('data-collapse', 'false');
+                            tr[i].setAttribute('data-collapse', 'false');
+                        }
+                    }
+                }
+            }
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function togglePrefilter(x) {
+            var attribute = x.className;
+
+            if (attribute.includes(" active")) {
+                x.className = x.className.replace(" active", "");
+            } else {
+                x.className += " active";
+            }
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function clearPrefilters() {
+            var prefilters = document.getElementsByTagName("button");
+            for (var i = 0; i < prefilters.length; i++) {
+                var prefilter = prefilters[i].getAttribute("data-prefilter");
+                var active = prefilters[i].className.includes(" active");
+                if (active) {
+                    prefilters[i].className = prefilters[i].className.replace(" active", "");
+                }
+            }
+
+            var input = document.getElementById("filter-by-keywords");
+            input.value = '';
+
+            filterView();
+        }
+    
+		</script>
+		<script>
+        function toggleAttachments(x) {
+            var grandParent = x.parentElement?.parentElement;
+            if (!grandParent) return;
+
+            var attachments = grandParent.getElementsByClassName('attachments');
+            for (var i = 0; i < attachments.length; i++) {
+                if (attachments[i].style.display === "none") {
+                    attachments[i].style.display = "block";
+                } else {
+                    attachments[i].style.display = "none";
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function toggleStacktraces(x) {
+            var grandParent = x.parentElement?.parentElement;
+            if (!grandParent) return;
+
+            var stacktraces = grandParent.getElementsByClassName('stacktraces');
+            for (var i = 0; i < stacktraces.length; i++) {
+                if (stacktraces[i].style.display === "none") {
+                    stacktraces[i].style.display = "block";
+                } else {
+                    stacktraces[i].style.display = "none";
+                }
+            }
+        }
+    
+		</script>
+		<script>
+        function editorCopy() {
+            var textArea = document.getElementById("scenario-script");
+            textArea.select();
+            navigator.clipboard.writeText(textArea.value);
+            window.getSelection().removeAllRanges();
+        }
+    
+		</script>
+		<script>
+        function onloadFilter() {
+            const viewMode = new URLSearchParams(window.location.search).get('viewMode');
+            if (viewMode == "Editor") { 
+                loadEditor();
+                return;
+            }
+
+            const filter = new URLSearchParams(window.location.search).get('filterByKeywords');
+            if (!filter) 
+                return;
+
+            var input = document.getElementById("filter-by-keywords");
+            if (input) {
+                input.value = filter;
+                filterView();
+
+                var table = document.getElementById("table-list");
+                var tr = table.getElementsByTagName("tr");
+
+                for (var i = 0; i < tr.length; i++) {
+                    var role = tr[i].getAttribute("data-role");
+                    if (role == "scenario") {
+                        if (tr[i].style.display == "") {
+                            var featureId = tr[i].getAttribute('data-featureid');
+                            var scenarioId = tr[i].getAttribute('data-scenarioid');
+                            var feature = document.getElementById(featureId).innerHTML;
+                            var scenario = document.getElementById(scenarioId).innerHTML;
+
+                            document.getElementById('right-section').innerHTML = feature + scenario;
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    
+		</script>
+		<script>
+      document.addEventListener("keydown", function (event) {
+        if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "e") {
+          event.preventDefault();
+
+          const url = new URL(window.location.href);
+          url.searchParams.set("viewMode", "Editor");
+
+          window.open(
+            url.toString(),
+            "newwindow",
+            "width=700,height=700,left=100,top=100"
+          );
+        }
+      });
+    
+		</script>
+	</head>
+	<body onload="loadViewMode('project-view','Overview'); loadAnalytics(); onloadFilter()">
+		
+		<!-- Header Section -->
+		<header>
+			<span class="project-name">JHA.Profitstars.PSI.Integration.Testing</span>
+			<br>
+			<span class="project-date">Generated Wed 4 Feb 2026 23:33:49 GMT+0</span>
+		</header>
+		
+		<!-- Project Navigation Section -->
+		<nav class="navigation">
+			<span>|</span>
+			<a class="navigation-link" title="Overview" href="#" onclick="loadViewMode('project-view','Overview');">Overview</a>
+			<span>|</span>
+			<a class="navigation-link" title="Features List View" href="#" onclick="loadViewMode('features-view','Features');">Features</a>
+			<span>|</span>
+			<a class="navigation-link" title="Scenarios List View" href="#" onclick="loadViewMode('scenarios-view','Scenarios');">Scenarios</a>
+			<span>|</span>
+			<a class="navigation-link" title="Steps List View" href="#" onclick="loadViewMode('steps-view','Steps');">Steps</a>
+			<span>|</span>
+			<a class="navigation-link" title="Analytics" href="#" onclick="loadAnalytics()">Analytics</a>
+			<span>|</span>
+		</nav>
+		
+		<!-- Content Wrapper Section -->
+		<div id="content-wrapper">
+			
+			<!-- Left Content Section -->
+			<div id="left-section" class="bg-light p-3">
+				<div class="section layout-row">
+					
+					<!-- View Title Section -->
+					<div class="layout-column align-left">
+						<span id="view-title" class="page-name">Overview</span>
+					</div>
+					
+					<!-- PreFilters Section -->
+					<div class="layout-column align-right">
+						<button class="prefilter" data-prefilter="Passed" title="Preset Filter with Passed" onclick="togglePrefilter(this)">Passed</button>
+						<button class="prefilter" data-prefilter="Incomplete" title="Preset Filter with Incomplete" onclick="togglePrefilter(this)">Incomplete</button>
+						<button class="prefilter" data-prefilter="Failed" title="Preset Filter with Failed" onclick="togglePrefilter(this)">Failed</button>
+						<button class="prefilter" data-prefilter="Skipped" title="Preset Filter with Skipped" onclick="togglePrefilter(this)">Skipped</button>
+						<button title="Clear Filters" onclick="clearPrefilters()">Clear</button>
+					</div>
+				</div>
+				
+				<!-- Filter Section -->
+				<div class="section">
+					<div class="layout-row filter-group">
+						<div class="filter-group-text">
+							<span class="bi bi-search"></span>
+						</div>
+						<div style="width: 100%">
+							<input onkeyup="filterView()" class="filter-group-input" id="filter-by-keywords" type="text" placeholder="Filter by Keywords">
+						</div>
+					</div>
+				</div>
+				<div id="list-view"></div>
+			</div>
+			
+			<!-- Splitter Content Section -->
+			<div id="splitter"></div>
+			
+			<!-- Right Content Section -->
+			<div id="right-section" class="bg-light p-3">
+			</div>
+		</div>
+		
+		<!-- Content Splitter Script -->
+		<script>
+        const splitter = document.getElementById('splitter');
+        const leftSection = document.getElementById('left-section');
+        const rightSection = document.getElementById('right-section');
+
+        let isDragging = false;
+
+        splitter.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            document.body.style.cursor = 'col-resize';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+
+            document.body.style.userSelect = 'none';
+
+            const totalWidth = leftSection.offsetWidth + rightSection.offsetWidth + splitter.offsetWidth;
+            const leftWidth = e.clientX - leftSection.getBoundingClientRect().left;
+
+            if (leftWidth > 50 && leftWidth < totalWidth - 50) {
+                leftSection.style.flex = `0 0 ${leftWidth}px`;
+                rightSection.style.flex = `1 1 auto`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            document.body.style.cursor = 'default';
+            document.body.style.userSelect = '';
+        });
+    
+		</script>
+		
+		<!-- Footer Section -->
+		<footer>
+			©2026 Expressium All Rights Reserved
+		</footer>
+		<data style="display: none;">
+			
+			<!-- Data Overview -->
+			<div class="data-item" id="project-view">
+				<div class="section">
+					<table id="table-grid" class="tree-view">
+						<tbody id="table-list">
+							<tr>
+								<td class="grid-folder" width="16px;">📂</td>
+								<td class="gridline" colspan="9">
+									<span class="gridline-folder">JHA.Profitstars.PSI.Integration.Testing</span>
+								</td>
+								<td class="gridline" style="padding-right: 8px;" colspan="2" align="right">
+									<a class="grid-option bi bi-plus-lg" title="Expand All Features" href="#" onclick="loadExpandAll()"></a>
+									<a class="grid-option bi bi-dash-lg" title="Collapse All Features" href="#" onclick="loadCollapseAll()"></a>
+								</td>
+							</tr>
+							<tr data-name="Features" data-role="folder">
+								<td></td>
+								<td class="grid-folder" width="16px;">📂</td>
+								<td class="gridline" colspan="9">
+									<span class="gridline-folder">Features</span>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-name="Features\Forecasting" data-role="folder">
+								<td></td>
+								<td></td>
+								<td class="grid-folder" width="16px;">📂</td>
+								<td class="gridline" colspan="8">
+									<span class="gridline-folder">Forecasting</span>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-name="Features\Forecasting\LiquidityRisk" data-role="folder">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td class="grid-folder" width="16px;">📂</td>
+								<td class="gridline" colspan="7">
+									<span class="gridline-folder">LiquidityRisk</span>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-name="Features\Forecasting\LiquidityRisk\Setup" data-role="folder">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td class="grid-folder" width="16px;">📂</td>
+								<td class="gridline" colspan="6">
+									<span class="gridline-folder">Setup</span>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="Features\Forecasting\LiquidityRisk\Setup" data-name="23bc4146-24a4-4aee-8c60-477e9535c91e" data-role="feature" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" onclick="loadFeature(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td data-collapse="false" width="16px;" class="gridline-toggle" title="Toggle Feature" onclick="loadCollapse(this);">
+									<span class="bi bi-chevron-down"></span>
+								</td>
+								<td class="gridline" colspan="5">
+									<span class="status-dot bgcolor-failed"></span>
+									<a class="gridline-heading" href="#">Forecasting Liquidity Risk Setup</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="23bc4146-24a4-4aee-8c60-477e9535c91e" data-role="scenario" data-tags="Forecasting Liquidity Risk Setup Failed  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup  Features/Forecasting/LiquidityRisk/Setup/ForecastingLiquidityRiskSetup.feature" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="72c340efd9a5ae57aa54e28d83c432d3" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16px;"></td>
+								<td class="gridline" colspan="4">
+									<span class="status-dot bgcolor-failed"></span>
+									<a href="#">View Category Hierarchy on the Liquidity Risk Setup page</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="23bc4146-24a4-4aee-8c60-477e9535c91e" data-role="scenario" data-tags="Forecasting Liquidity Risk Setup Failed  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup  Features/Forecasting/LiquidityRisk/Setup/ForecastingLiquidityRiskSetup.feature" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="ed66a6e8973ac4548e814b772cb5917a" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16px;"></td>
+								<td class="gridline" colspan="4">
+									<span class="status-dot bgcolor-failed"></span>
+									<a href="#">Selecting Limit Accounts</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="23bc4146-24a4-4aee-8c60-477e9535c91e" data-role="scenario" data-tags="Forecasting Liquidity Risk Setup Failed  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup  Features/Forecasting/LiquidityRisk/Setup/ForecastingLiquidityRiskSetup.feature" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="bb1d801b9898cb5aaaac04ef16d963d5" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16px;"></td>
+								<td class="gridline" colspan="4">
+									<span class="status-dot bgcolor-failed"></span>
+									<a href="#">Select Account for Unfunded Loan Commitments</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+							<tr data-parent="23bc4146-24a4-4aee-8c60-477e9535c91e" data-role="scenario" data-tags="Forecasting Liquidity Risk Setup Skipped  @DEVOPS_WI:834104 @ignore @forecasting @liquidity_risk_setup  Features/Forecasting/LiquidityRisk/Setup/ForecastingLiquidityRiskSetup.feature" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="a758f81f83626b5ba0c5339c158c4997" onclick="loadScenario(this);">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td width="16px;"></td>
+								<td class="gridline" colspan="4">
+									<span class="status-dot bgcolor-skipped"></span>
+									<a href="#">Saving the Liquidity Risk Setup</a>
+								</td>
+								<td class="gridline" align="right"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- Data Features View -->
+			<div class="data-item" id="features-view">
+				<div class="section">
+					<table id="table-grid" class="grid-view">
+						<thead>
+							<tr data-role="header">
+								<th width="20" class="align-center" onclick="sortTableByColumn(0)"></th>
+								<th onclick="sortTableByColumn(1)">Feature<span class="sort-column">⇅</span>
+								</th>
+								<th width="110" onclick="sortTableByColumnByAttibute(2, &quot;data-scenarios&quot;)">Scenarios<span class="sort-column">⇅</span>
+								</th>
+								<th width="120" onclick="sortTableByColumnByAttibute(3, &quot;data-completion&quot;)">Completion<span class="sort-column">⇅</span>
+								</th>
+								<th width="110" onclick="sortTableByColumnByAttibute(4, &quot;data-duration&quot;)">Duration<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumn(5)">Status<span class="sort-column">⇅</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody id="table-list">
+							<tr class="gridline" data-role="feature" data-tags="Forecasting Liquidity Risk Setup " data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" onclick="loadFeature(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Forecasting Liquidity Risk Setup</a>
+								</td>
+								<td align="center" data-scenarios="0004">4</td>
+								<td align="center" data-completion="0000">0%</td>
+								<td align="center" data-duration="02:55:102">2min 55s</td>
+								<td>Failed</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- Data Scenarios View -->
+			<div class="data-item" id="scenarios-view">
+				<div class="section">
+					<table id="table-grid" class="grid-view">
+						<thead>
+							<tr data-role="header">
+								<th width="20" class="align-center" onclick="sortTableByColumn(0)"></th>
+								<th onclick="sortTableByColumn(1)">Scenario<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumnByAttibute(2, &quot;data-order&quot;)">Order<span class="sort-column">⇅</span>
+								</th>
+								<th width="110" onclick="sortTableByColumnByAttibute(3, &quot;data-duration&quot;)">Duration<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumn(4)">Status<span class="sort-column">⇅</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody id="table-list">
+							<tr class="gridline" data-role="scenario" data-tags="Failed Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="72c340efd9a5ae57aa54e28d83c432d3" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">View Category Hierarchy on the Liquidity Risk Setup page</a>
+								</td>
+								<td align="center" data-order="0001">1</td>
+								<td align="center" data-duration="01:14:047">1min 14s</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Failed Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="ed66a6e8973ac4548e814b772cb5917a" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Selecting Limit Accounts</a>
+								</td>
+								<td align="center" data-order="0002">2</td>
+								<td align="center" data-duration="01:06:293">1min 6s</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Failed Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="bb1d801b9898cb5aaaac04ef16d963d5" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Select Account for Unfunded Loan Commitments</a>
+								</td>
+								<td align="center" data-order="0003">3</td>
+								<td align="center" data-duration="00:34:761">34s 761ms</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="scenario" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @ignore @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="a758f81f83626b5ba0c5339c158c4997" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Saving the Liquidity Risk Setup</a>
+								</td>
+								<td align="center" data-order="0004">4</td>
+								<td align="center" data-duration="00:00:000">0s 000ms</td>
+								<td>Skipped</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- Data Steps View -->
+			<div class="data-item" id="steps-view">
+				<div class="section">
+					<table id="table-grid" class="grid-view">
+						<thead>
+							<tr data-role="header">
+								<th width="20" class="align-center" onclick="sortTableByColumn(0)"></th>
+								<th onclick="sortTableByColumn(1)">Step<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumnByAttibute(2, &quot;data-count&quot;)">Usage<span class="sort-column">⇅</span>
+								</th>
+								<th width="100" onclick="sortTableByColumn(3)">Status<span class="sort-column">⇅</span>
+								</th>
+							</tr>
+						</thead>
+						<tbody id="table-list">
+							<tr class="gridline" data-role="step" data-tags="Failed Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="72c340efd9a5ae57aa54e28d83c432d3" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">And "&lt;Category&gt;" category is expanded by default</a>
+								</td>
+								<td align="center" data-count="0005">5</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Failed Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="ed66a6e8973ac4548e814b772cb5917a" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Given the "&lt;SubCategory&gt;" subcategory is displayed under Additional Sources</a>
+								</td>
+								<td align="center" data-count="0002">2</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Failed Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="bb1d801b9898cb5aaaac04ef16d963d5" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-failed"></span>
+								</td>
+								<td>
+									<a href="#">Given Unfunded Loan Commitments subcategory is displayed under Funding Needs</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Failed</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="72c340efd9a5ae57aa54e28d83c432d3" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Then the respective "&lt;SubCategory&gt;" subcategory is displayed under "&lt;Category&gt;"</a>
+								</td>
+								<td align="center" data-count="0005">5</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="ed66a6e8973ac4548e814b772cb5917a" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">When I select "&lt;SubCategory&gt;" from the Additional Sources category</a>
+								</td>
+								<td align="center" data-count="0002">2</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="ed66a6e8973ac4548e814b772cb5917a" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">And I make selections in the Accounts field for the subcategory</a>
+								</td>
+								<td align="center" data-count="0002">2</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="ed66a6e8973ac4548e814b772cb5917a" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Then the Select Limit Accounts section displays below the Accounts field</a>
+								</td>
+								<td align="center" data-count="0002">2</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="bb1d801b9898cb5aaaac04ef16d963d5" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">When I select the "Unfunded Loan Commitments" subcategory</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="bb1d801b9898cb5aaaac04ef16d963d5" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Then the Account field contains a Dropdown</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="bb1d801b9898cb5aaaac04ef16d963d5" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">And I can select only one account from the Dropdown</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @ignore @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="a758f81f83626b5ba0c5339c158c4997" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Given I click Forecasting and then Liquidity Risk Subtab from the Main Menu</a>
+								</td>
+								<td align="center" data-count="0009">9</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @ignore @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="a758f81f83626b5ba0c5339c158c4997" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">When I select Setup from Liquidity Risk breadcrumb</a>
+								</td>
+								<td align="center" data-count="0009">9</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @ignore @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="a758f81f83626b5ba0c5339c158c4997" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Then I am on the Forecasting Liquidity Risk Setup page</a>
+								</td>
+								<td align="center" data-count="0009">9</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @ignore @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="a758f81f83626b5ba0c5339c158c4997" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">When I edit any subcategory on the Forecasting Liquidity Risk Setup page</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @ignore @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="a758f81f83626b5ba0c5339c158c4997" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">And I click the Save button</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Skipped Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @ignore @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="a758f81f83626b5ba0c5339c158c4997" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-skipped"></span>
+								</td>
+								<td>
+									<a href="#">Then the changes are reflected on Liquidity Risk Detail page</a>
+								</td>
+								<td align="center" data-count="0001">1</td>
+								<td>Skipped</td>
+							</tr>
+							<tr class="gridline" data-role="step" data-tags="Passed Forecasting Liquidity Risk Setup  @DEVOPS_WI:834104 @forecasting @liquidity_risk_setup" data-featureid="23bc4146-24a4-4aee-8c60-477e9535c91e" data-scenarioid="72c340efd9a5ae57aa54e28d83c432d3" onclick="loadScenario(this);">
+								<td align="center">
+									<span class="status-dot bgcolor-passed"></span>
+								</td>
+								<td>
+									<a href="#">Given the "&lt;Category&gt;" category is non editable</a>
+								</td>
+								<td align="center" data-count="0005">5</td>
+								<td>Passed</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<!-- Data Feature -->
+			<div class="data-item" id="23bc4146-24a4-4aee-8c60-477e9535c91e">
+				
+				<!-- Feature Section -->
+				<div class="section">
+					
+					<!-- Data Feature Tags -->
+					<div>
+						<span class="feature-tags"></span>
+					</div>
+					
+					<!-- Data Feature Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="feature-keyword">Feature:
+						</span>
+						<span class="feature-name">Forecasting Liquidity Risk Setup</span>
+					</div>
+					
+					<!-- Data Feature Description -->
+					<div>
+						<ul class="feature-description">
+							<li>As a Financial Analyst, I want to view and configure the Liquidity Risk Setup page under Forecasting.</li>
+						</ul>
+					</div>
+					<hr>
+					
+					<!-- Data Feature Background -->
+					<div>
+						<span class="background-keyword">Background:</span>
+						
+						<!-- Data Background Steps -->
+						<div>
+							<ul class="scenario-steps">
+								<li>
+									<span class="color-skipped"></span>
+									<span class="step-keyword">Given</span>
+									<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+								</li>
+								<li>
+									<span class="color-skipped"></span>
+									<span class="step-keyword">When</span>
+									<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+								</li>
+								<li>
+									<span class="color-skipped"></span>
+									<span class="step-keyword">Then</span>
+									<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<hr>
+				</div>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="72c340efd9a5ae57aa54e28d83c432d3">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@DEVOPS_WI:834104 @forecasting @liquidity_risk_setup</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">View Category Hierarchy on the Liquidity Risk Setup page</span>
+						<span class="circle-number">1</span>
+						<span class="scenario-duration">16s 743ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">the "&lt;Category&gt;" category is non editable</span>
+							</li>
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">"&lt;Category&gt;" category is expanded by default</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>PlaywrightException</b>
+										<br>
+										Locator expected to have count '4'<br>But was: '0'
+										<br>Call log:<br>
+										- Expect "ToHaveCountAsync" with timeout 5000ms<br>
+										- waiting for Locator("fps-common-ag-grid div[role='row'].ag-row-level-2 span.ag-icon-tree-open")<br>
+										9 × locator resolved to 0 elements<br>
+										- unexpected value "0"<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, FrameExpectOptions expectOptions, Object expected, String message, String title) in /_/src/Playwright/Core/AssertionsBase.cs:line 88
+											<br>
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, ExpectedTextValue[] expectedText, Object expected, String message, String title, FrameExpectOptions options) in /_/src/Playwright/Core/AssertionsBase.cs:line 66
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.VerificationHelper.ElementToHaveCount(String selector, Int32 count) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\VerificationHelper.cs:line 229
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Forecasting.LiqudityRisk.Setup.ForecastingLiquidityRiskSetupSteps.GivenCategoryIsExpandedByDefault(String categoryName) in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Forecasting\LiquidityRisk\Setup\ForecastingLiquidityRiskSetupSteps.cs:line 54
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">the respective "&lt;SubCategory&gt;" subcategory is displayed under "&lt;Category&gt;"</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Examples -->
+					<div>
+						<span class="examples-keyword">Examples:</span>
+						<div class="examples-datatable">
+							<table class="scenario-datatable">
+								<tbody>
+									<tr>
+										<td>|</td>
+										<td>Category</td>
+										<td>|</td>
+										<td>SubCategory</td>
+										<td>|</td>
+									</tr>
+									<tr>
+										<td>|</td>
+										<td>Funding Needs</td>
+										<td>|</td>
+										<td>Forecasted NMD's Maturities</td>
+										<td>|</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@DEVOPS_WI:834104 @forecasting @liquidity_risk_setup</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">View Category Hierarchy on the Liquidity Risk Setup page</span>
+						<span class="circle-number">2</span>
+						<span class="scenario-duration">14s 013ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">the "&lt;Category&gt;" category is non editable</span>
+							</li>
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">"&lt;Category&gt;" category is expanded by default</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>PlaywrightException</b>
+										<br>
+										Locator expected to have count '4'<br>But was: '0'
+										<br>Call log:<br>
+										- Expect "ToHaveCountAsync" with timeout 5000ms<br>
+										- waiting for Locator("fps-common-ag-grid div[role='row'].ag-row-level-2 span.ag-icon-tree-open")<br>
+										9 × locator resolved to 0 elements<br>
+										- unexpected value "0"<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, FrameExpectOptions expectOptions, Object expected, String message, String title) in /_/src/Playwright/Core/AssertionsBase.cs:line 88
+											<br>
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, ExpectedTextValue[] expectedText, Object expected, String message, String title, FrameExpectOptions options) in /_/src/Playwright/Core/AssertionsBase.cs:line 66
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.VerificationHelper.ElementToHaveCount(String selector, Int32 count) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\VerificationHelper.cs:line 229
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Forecasting.LiqudityRisk.Setup.ForecastingLiquidityRiskSetupSteps.GivenCategoryIsExpandedByDefault(String categoryName) in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Forecasting\LiquidityRisk\Setup\ForecastingLiquidityRiskSetupSteps.cs:line 54
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">the respective "&lt;SubCategory&gt;" subcategory is displayed under "&lt;Category&gt;"</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Examples -->
+					<div>
+						<span class="examples-keyword">Examples:</span>
+						<div class="examples-datatable">
+							<table class="scenario-datatable">
+								<tbody>
+									<tr>
+										<td>|</td>
+										<td>Category</td>
+										<td>|</td>
+										<td>SubCategory</td>
+										<td>|</td>
+									</tr>
+									<tr>
+										<td>|</td>
+										<td>Funding Needs</td>
+										<td>|</td>
+										<td>Forecasted CD's Maturities</td>
+										<td>|</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@DEVOPS_WI:834104 @forecasting @liquidity_risk_setup</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">View Category Hierarchy on the Liquidity Risk Setup page</span>
+						<span class="circle-number">3</span>
+						<span class="scenario-duration">13s 711ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">the "&lt;Category&gt;" category is non editable</span>
+							</li>
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">"&lt;Category&gt;" category is expanded by default</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>PlaywrightException</b>
+										<br>
+										Locator expected to have count '4'<br>But was: '0'
+										<br>Call log:<br>
+										- Expect "ToHaveCountAsync" with timeout 5000ms<br>
+										- waiting for Locator("fps-common-ag-grid div[role='row'].ag-row-level-2 span.ag-icon-tree-open")<br>
+										9 × locator resolved to 0 elements<br>
+										- unexpected value "0"<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, FrameExpectOptions expectOptions, Object expected, String message, String title) in /_/src/Playwright/Core/AssertionsBase.cs:line 88
+											<br>
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, ExpectedTextValue[] expectedText, Object expected, String message, String title, FrameExpectOptions options) in /_/src/Playwright/Core/AssertionsBase.cs:line 66
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.VerificationHelper.ElementToHaveCount(String selector, Int32 count) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\VerificationHelper.cs:line 229
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Forecasting.LiqudityRisk.Setup.ForecastingLiquidityRiskSetupSteps.GivenCategoryIsExpandedByDefault(String categoryName) in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Forecasting\LiquidityRisk\Setup\ForecastingLiquidityRiskSetupSteps.cs:line 54
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">the respective "&lt;SubCategory&gt;" subcategory is displayed under "&lt;Category&gt;"</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Examples -->
+					<div>
+						<span class="examples-keyword">Examples:</span>
+						<div class="examples-datatable">
+							<table class="scenario-datatable">
+								<tbody>
+									<tr>
+										<td>|</td>
+										<td>Category</td>
+										<td>|</td>
+										<td>SubCategory</td>
+										<td>|</td>
+									</tr>
+									<tr>
+										<td>|</td>
+										<td>Primary Sources</td>
+										<td>|</td>
+										<td>Forecasted NMD's New Volume</td>
+										<td>|</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@DEVOPS_WI:834104 @forecasting @liquidity_risk_setup</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">View Category Hierarchy on the Liquidity Risk Setup page</span>
+						<span class="circle-number">4</span>
+						<span class="scenario-duration">14s 540ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">the "&lt;Category&gt;" category is non editable</span>
+							</li>
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">"&lt;Category&gt;" category is expanded by default</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>PlaywrightException</b>
+										<br>
+										Locator expected to have count '4'<br>But was: '0'
+										<br>Call log:<br>
+										- Expect "ToHaveCountAsync" with timeout 5000ms<br>
+										- waiting for Locator("fps-common-ag-grid div[role='row'].ag-row-level-2 span.ag-icon-tree-open")<br>
+										9 × locator resolved to 0 elements<br>
+										- unexpected value "0"<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, FrameExpectOptions expectOptions, Object expected, String message, String title) in /_/src/Playwright/Core/AssertionsBase.cs:line 88
+											<br>
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, ExpectedTextValue[] expectedText, Object expected, String message, String title, FrameExpectOptions options) in /_/src/Playwright/Core/AssertionsBase.cs:line 66
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.VerificationHelper.ElementToHaveCount(String selector, Int32 count) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\VerificationHelper.cs:line 229
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Forecasting.LiqudityRisk.Setup.ForecastingLiquidityRiskSetupSteps.GivenCategoryIsExpandedByDefault(String categoryName) in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Forecasting\LiquidityRisk\Setup\ForecastingLiquidityRiskSetupSteps.cs:line 54
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">the respective "&lt;SubCategory&gt;" subcategory is displayed under "&lt;Category&gt;"</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Examples -->
+					<div>
+						<span class="examples-keyword">Examples:</span>
+						<div class="examples-datatable">
+							<table class="scenario-datatable">
+								<tbody>
+									<tr>
+										<td>|</td>
+										<td>Category</td>
+										<td>|</td>
+										<td>SubCategory</td>
+										<td>|</td>
+									</tr>
+									<tr>
+										<td>|</td>
+										<td>Additional Sources</td>
+										<td>|</td>
+										<td>Total Cash Equivalents</td>
+										<td>|</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@DEVOPS_WI:834104 @forecasting @liquidity_risk_setup</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">View Category Hierarchy on the Liquidity Risk Setup page</span>
+						<span class="circle-number">5</span>
+						<span class="scenario-duration">15s 040ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">the "&lt;Category&gt;" category is non editable</span>
+							</li>
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">"&lt;Category&gt;" category is expanded by default</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>PlaywrightException</b>
+										<br>
+										Locator expected to have count '4'<br>But was: '0'
+										<br>Call log:<br>
+										- Expect "ToHaveCountAsync" with timeout 5000ms<br>
+										- waiting for Locator("fps-common-ag-grid div[role='row'].ag-row-level-2 span.ag-icon-tree-open")<br>
+										9 × locator resolved to 0 elements<br>
+										- unexpected value "0"<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, FrameExpectOptions expectOptions, Object expected, String message, String title) in /_/src/Playwright/Core/AssertionsBase.cs:line 88
+											<br>
+											at Microsoft.Playwright.Core.AssertionsBase.ExpectImplAsync(String expression, ExpectedTextValue[] expectedText, Object expected, String message, String title, FrameExpectOptions options) in /_/src/Playwright/Core/AssertionsBase.cs:line 66
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.VerificationHelper.ElementToHaveCount(String selector, Int32 count) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\VerificationHelper.cs:line 229
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Forecasting.LiqudityRisk.Setup.ForecastingLiquidityRiskSetupSteps.GivenCategoryIsExpandedByDefault(String categoryName) in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Forecasting\LiquidityRisk\Setup\ForecastingLiquidityRiskSetupSteps.cs:line 54
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">the respective "&lt;SubCategory&gt;" subcategory is displayed under "&lt;Category&gt;"</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Examples -->
+					<div>
+						<span class="examples-keyword">Examples:</span>
+						<div class="examples-datatable">
+							<table class="scenario-datatable">
+								<tbody>
+									<tr>
+										<td>|</td>
+										<td>Category</td>
+										<td>|</td>
+										<td>SubCategory</td>
+										<td>|</td>
+									</tr>
+									<tr>
+										<td>|</td>
+										<td>Non-Core Funding Dependence</td>
+										<td>|</td>
+										<td>Short Term Investments</td>
+										<td>|</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="ed66a6e8973ac4548e814b772cb5917a">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@DEVOPS_WI:834104 @forecasting @liquidity_risk_setup</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Selecting Limit Accounts</span>
+						<span class="circle-number">1</span>
+						<span class="scenario-duration">31s 656ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">the "&lt;SubCategory&gt;" subcategory is displayed under Additional Sources</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Exception</b>
+										<br>
+										Wait to be clickable failed for element with selector 'fps-common-ag-grid div[role='row'].ag-row-level-2:has-text('Additional Sources') span.ag-icon-tree-closed'.<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.WaitForElementToBeClickable(String selector, Nullable`1 elementIndex, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 549
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.ClickOnElement(String selector, Nullable`1 elementIndex, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 286
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Forecasting.LiqudityRisk.Setup.ForecastingLiquidityRiskSetupSteps.GivenTheSubcategoryIsDisplayedUnderAdditionalSources(String subCategoryName) in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Forecasting\LiquidityRisk\Setup\ForecastingLiquidityRiskSetupSteps.cs:line 71
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select "&lt;SubCategory&gt;" from the Additional Sources category</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">I make selections in the Accounts field for the subcategory</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">the Select Limit Accounts section displays below the Accounts field</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Examples -->
+					<div>
+						<span class="examples-keyword">Examples:</span>
+						<div class="examples-datatable">
+							<table class="scenario-datatable">
+								<tbody>
+									<tr>
+										<td>|</td>
+										<td>SubCategory</td>
+										<td>|</td>
+									</tr>
+									<tr>
+										<td>|</td>
+										<td>Forecasted Non-Core CD's New Volume</td>
+										<td>|</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@DEVOPS_WI:834104 @forecasting @liquidity_risk_setup</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Selecting Limit Accounts</span>
+						<span class="circle-number">2</span>
+						<span class="scenario-duration">34s 636ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">the "&lt;SubCategory&gt;" subcategory is displayed under Additional Sources</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Exception</b>
+										<br>
+										Wait to be clickable failed for element with selector 'fps-common-ag-grid div[role='row'].ag-row-level-2:has-text('Additional Sources') span.ag-icon-tree-closed'.<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.WaitForElementToBeClickable(String selector, Nullable`1 elementIndex, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 549
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.ClickOnElement(String selector, Nullable`1 elementIndex, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 286
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Forecasting.LiqudityRisk.Setup.ForecastingLiquidityRiskSetupSteps.GivenTheSubcategoryIsDisplayedUnderAdditionalSources(String subCategoryName) in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Forecasting\LiquidityRisk\Setup\ForecastingLiquidityRiskSetupSteps.cs:line 71
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select "&lt;SubCategory&gt;" from the Additional Sources category</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">I make selections in the Accounts field for the subcategory</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">the Select Limit Accounts section displays below the Accounts field</span>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Data Scenario Examples -->
+					<div>
+						<span class="examples-keyword">Examples:</span>
+						<div class="examples-datatable">
+							<table class="scenario-datatable">
+								<tbody>
+									<tr>
+										<td>|</td>
+										<td>SubCategory</td>
+										<td>|</td>
+									</tr>
+									<tr>
+										<td>|</td>
+										<td>Forecasted Borrowings New Volume</td>
+										<td>|</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="bb1d801b9898cb5aaaac04ef16d963d5">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@DEVOPS_WI:834104 @forecasting @liquidity_risk_setup</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-failed"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Select Account for Unfunded Loan Commitments</span>
+						<span class="scenario-duration">34s 761ms</span>
+						<a href="#" class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></a>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+							</li>
+							<li>
+								<span class="step-marker color-passed">✓</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-failed">✗</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">Unfunded Loan Commitments subcategory is displayed under Funding Needs</span>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li>
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Exception</b>
+										<br>
+										Wait to be clickable failed for element with selector 'fps-common-ag-grid div[role='row'].ag-row-level-2:has-text('Funding Needs') span.ag-icon-tree-closed'.<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<b>Stacktrace</b>
+										<br>
+										<div class="message-stacktrace">
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.WaitForElementToBeClickable(String selector, Nullable`1 elementIndex, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 549
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.ClickOnElement(String selector, Nullable`1 elementIndex, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 286
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Forecasting.LiqudityRisk.Setup.ForecastingLiquidityRiskSetupSteps.GivenUnfundedLoanCommitmentsSubcategoryIsDisplayedUnderFundingNeeds() in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Forecasting\LiquidityRisk\Setup\ForecastingLiquidityRiskSetupSteps.cs:line 100
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select the "Unfunded Loan Commitments" subcategory</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">the Account field contains a Dropdown</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">I can select only one account from the Dropdown</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Scenario -->
+			<div class="data-item" id="a758f81f83626b5ba0c5339c158c4997">
+				
+				<!-- Scenario Section -->
+				<div class="section" style="width: fit-content; max-width: 98%">
+					
+					<!-- Data Scenario Tags -->
+					<div>
+						<span class="scenario-tags">@DEVOPS_WI:834104 @ignore @forecasting @liquidity_risk_setup</span>
+					</div>
+					
+					<!-- Data Scenario Name -->
+					<div>
+						<span class="status-dot bgcolor-skipped"></span>
+						<span class="scenario-keyword">Scenario:
+						</span>
+						<span class="scenario-name">Saving the Liquidity Risk Setup</span>
+						<span class="scenario-duration">0s 000ms</span>
+					</div>
+					
+					<!-- Data Scenario Steps -->
+					<div>
+						<ul class="scenario-steps">
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Given</span>
+								<span class="step-name">I click Forecasting and then Liquidity Risk Subtab from the Main Menu</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I select Setup from Liquidity Risk breadcrumb</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">I am on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">When</span>
+								<span class="step-name">I edit any subcategory on the Forecasting Liquidity Risk Setup page</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">And</span>
+								<span class="step-name">I click the Save button</span>
+							</li>
+							<li>
+								<span class="step-marker color-skipped">✗</span>
+								<span class="step-keyword">Then</span>
+								<span class="step-name">the changes are reflected on Liquidity Risk Detail page</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<hr>
+			</div>
+			
+			<!-- Data Analytics -->
+			<div class="data-item" id="analytics-features">
+				<div class="section">
+					<span class="page-name" data-testid="page-title">Analytics</span>
+				</div>
+				<hr>
+				<hr>
+				<div class="section" style="width: fit-content; margin: auto;">
+					<span class="chart-name" data-testid="features-chart-title">Features</span>
+					<div class="section chart-outline">
+						
+						<!-- Data Analytics Status Chart -->
+						<div class="section" style="text-align: center; margin: auto;">
+							<svg width="160px" height="168px" viewBox="0 0 42 42">
+								<g transform="rotate(-90, 21, 21)">
+									<circle class="donut-segment-skipped" cx="21" cy="21" r="15.9155"></circle>
+									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="0"></circle>
+									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-0"></circle>
+									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="100 0" stroke-dashoffset="-0"></circle>
+								</g>
+								<g class="chart-text">
+									<text x="50%" y="50%" class="chart-number" data-testid="features-chart-passed">0%</text>
+									<text x="50%" y="50%" class="chart-label">Passed</text>
+								</g>
+							</svg>
+						</div>
+						<div class="section" style="text-align: center; margin: auto;">
+							<table align="center">
+								<tbody>
+									<tr>
+										<td class="color-passed chart-count">
+											<span class="chart-count-number">0</span>
+											<br>
+											<span class="chart-count-percentage">0%</span>
+											<br>
+											<span class="chart-count-status">Passed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-passed"></div>
+										</td>
+										<td class="color-incomplete chart-count">
+											<span class="chart-count-number">0</span>
+											<br>
+											<span class="chart-count-percentage">0%</span>
+											<br>
+											<span class="chart-count-status">Incomplete</span>
+											<br>
+											<div class="chart-count-bar bgcolor-incomplete"></div>
+										</td>
+										<td class="color-failed chart-count">
+											<span class="chart-count-number">1</span>
+											<br>
+											<span class="chart-count-percentage">100%</span>
+											<br>
+											<span class="chart-count-status">Failed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-failed"></div>
+										</td>
+										<td class="color-skipped chart-count">
+											<span class="chart-count-number">0</span>
+											<br>
+											<span class="chart-count-percentage">0%</span>
+											<br>
+											<span class="chart-count-status">Skipped</span>
+											<br>
+											<div class="chart-count-bar bgcolor-skipped"></div>
+										</td>
+										<td class="color-total chart-count">
+											<span class="chart-count-number">1</span>
+											<br>
+											<span class="chart-count-percentage">100%</span>
+											<br>
+											<span class="chart-count-status">Total</span>
+											<br>
+											<div class="chart-count-bar bgcolor-total"></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Data Analytics Duration -->
+				<div style="padding-top: 6px; text-align: center; justify-content: center; align-items: center; display: flex;">
+					<span class="bi bi-stopwatch" style="color: dimgray; font-size: 2.5em;"></span>
+					<span style="font-size: 1.25em; padding-left: 8px; padding-top: 4px;">
+						<span style="color: dimgray;">Duration:
+						</span>
+						<span data-testid="project-duration">3min 16s</span>
+					</span>
+				</div>
+			</div>
+			
+			<!-- Data Analytics -->
+			<div class="data-item" id="analytics-scenarios">
+				<div class="section">
+					<span class="page-name" data-testid="page-title">Analytics</span>
+				</div>
+				<hr>
+				<hr>
+				<div class="section" style="width: fit-content; margin: auto;">
+					<span class="chart-name" data-testid="scenarios-chart-title">Scenarios</span>
+					<div class="section chart-outline">
+						
+						<!-- Data Analytics Status Chart -->
+						<div class="section" style="text-align: center; margin: auto;">
+							<svg width="160px" height="168px" viewBox="0 0 42 42">
+								<g transform="rotate(-90, 21, 21)">
+									<circle class="donut-segment-skipped" cx="21" cy="21" r="15.9155"></circle>
+									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="0"></circle>
+									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-0"></circle>
+									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="75 25" stroke-dashoffset="-0"></circle>
+								</g>
+								<g class="chart-text">
+									<text x="50%" y="50%" class="chart-number" data-testid="scenarios-chart-passed">0%</text>
+									<text x="50%" y="50%" class="chart-label">Passed</text>
+								</g>
+							</svg>
+						</div>
+						<div class="section" style="text-align: center; margin: auto;">
+							<table align="center">
+								<tbody>
+									<tr>
+										<td class="color-passed chart-count">
+											<span class="chart-count-number">0</span>
+											<br>
+											<span class="chart-count-percentage">0%</span>
+											<br>
+											<span class="chart-count-status">Passed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-passed"></div>
+										</td>
+										<td class="color-incomplete chart-count">
+											<span class="chart-count-number">0</span>
+											<br>
+											<span class="chart-count-percentage">0%</span>
+											<br>
+											<span class="chart-count-status">Incomplete</span>
+											<br>
+											<div class="chart-count-bar bgcolor-incomplete"></div>
+										</td>
+										<td class="color-failed chart-count">
+											<span class="chart-count-number">3</span>
+											<br>
+											<span class="chart-count-percentage">75%</span>
+											<br>
+											<span class="chart-count-status">Failed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-failed"></div>
+										</td>
+										<td class="color-skipped chart-count">
+											<span class="chart-count-number">1</span>
+											<br>
+											<span class="chart-count-percentage">25%</span>
+											<br>
+											<span class="chart-count-status">Skipped</span>
+											<br>
+											<div class="chart-count-bar bgcolor-skipped"></div>
+										</td>
+										<td class="color-total chart-count">
+											<span class="chart-count-number">4</span>
+											<br>
+											<span class="chart-count-percentage">100%</span>
+											<br>
+											<span class="chart-count-status">Total</span>
+											<br>
+											<div class="chart-count-bar bgcolor-total"></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Data Analytics Duration -->
+				<div style="padding-top: 6px; text-align: center; justify-content: center; align-items: center; display: flex;">
+					<span class="bi bi-stopwatch" style="color: dimgray; font-size: 2.5em;"></span>
+					<span style="font-size: 1.25em; padding-left: 8px; padding-top: 4px;">
+						<span style="color: dimgray;">Duration:
+						</span>
+						<span data-testid="project-duration">3min 16s</span>
+					</span>
+				</div>
+			</div>
+			
+			<!-- Data Analytics -->
+			<div class="data-item" id="analytics-steps">
+				<div class="section">
+					<span class="page-name" data-testid="page-title">Analytics</span>
+				</div>
+				<hr>
+				<hr>
+				<div class="section" style="width: fit-content; margin: auto;">
+					<span class="chart-name" data-testid="steps-chart-title">Steps</span>
+					<div class="section chart-outline">
+						
+						<!-- Data Analytics Status Chart -->
+						<div class="section" style="text-align: center; margin: auto;">
+							<svg width="160px" height="168px" viewBox="0 0 42 42">
+								<g transform="rotate(-90, 21, 21)">
+									<circle class="donut-segment-skipped" cx="21" cy="21" r="15.9155"></circle>
+									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="51 49" stroke-dashoffset="0"></circle>
+									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-51"></circle>
+									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="14 86" stroke-dashoffset="-51"></circle>
+								</g>
+								<g class="chart-text">
+									<text x="50%" y="50%" class="chart-number" data-testid="steps-chart-passed">51%</text>
+									<text x="50%" y="50%" class="chart-label">Passed</text>
+								</g>
+							</svg>
+						</div>
+						<div class="section" style="text-align: center; margin: auto;">
+							<table align="center">
+								<tbody>
+									<tr>
+										<td class="color-passed chart-count">
+											<span class="chart-count-number">29</span>
+											<br>
+											<span class="chart-count-percentage">51%</span>
+											<br>
+											<span class="chart-count-status">Passed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-passed"></div>
+										</td>
+										<td class="color-incomplete chart-count">
+											<span class="chart-count-number">0</span>
+											<br>
+											<span class="chart-count-percentage">0%</span>
+											<br>
+											<span class="chart-count-status">Incomplete</span>
+											<br>
+											<div class="chart-count-bar bgcolor-incomplete"></div>
+										</td>
+										<td class="color-failed chart-count">
+											<span class="chart-count-number">8</span>
+											<br>
+											<span class="chart-count-percentage">14%</span>
+											<br>
+											<span class="chart-count-status">Failed</span>
+											<br>
+											<div class="chart-count-bar bgcolor-failed"></div>
+										</td>
+										<td class="color-skipped chart-count">
+											<span class="chart-count-number">20</span>
+											<br>
+											<span class="chart-count-percentage">35%</span>
+											<br>
+											<span class="chart-count-status">Skipped</span>
+											<br>
+											<div class="chart-count-bar bgcolor-skipped"></div>
+										</td>
+										<td class="color-total chart-count">
+											<span class="chart-count-number">57</span>
+											<br>
+											<span class="chart-count-percentage">100%</span>
+											<br>
+											<span class="chart-count-status">Total</span>
+											<br>
+											<div class="chart-count-bar bgcolor-total"></div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<hr>
+				
+				<!-- Data Analytics Duration -->
+				<div style="padding-top: 6px; text-align: center; justify-content: center; align-items: center; display: flex;">
+					<span class="bi bi-stopwatch" style="color: dimgray; font-size: 2.5em;"></span>
+					<span style="font-size: 1.25em; padding-left: 8px; padding-top: 4px;">
+						<span style="color: dimgray;">Duration:
+						</span>
+						<span data-testid="project-duration">3min 16s</span>
+					</span>
+				</div>
+			</div>
+			
+			<!-- Data Editor -->
+			<div class="data-item" id="editor-view">
+				<div class="section">
+					<span class="page-name">Gherkin Script Editor</span>
+				</div>
+				<hr>
+				
+				<!-- Editor Actions Section -->
+				<div class="section layout-row">
+					<div class="layout-column align-left">
+						<span class="chart-name">Scenario</span>
+					</div>
+				</div>
+				<div id="script-view">
+					<textarea id="scenario-script"></textarea>
+				</div>
+				<hr>
+				<div class="section">
+					<span class="chart-name">Step Definitions</span>
+				</div>
+				
+				<!-- Filter Section -->
+				<div class="section">
+					<div class="layout-row filter-group">
+						<div class="filter-group-text">
+							<span class="bi bi-search"></span>
+						</div>
+						<div style="width: 100%">
+							<input class="filter-group-input" onkeydown="Javascript: if (event.keyCode == 13) loadStepDefinitionByEnter();" onkeyup="filterStepDefinitions()" id="stepdefinition-filter" type="text" placeholder="Filter by Keywords">
+						</div>
+					</div>
+				</div>
+				<div class="section">
+					<table id="steps-grid" class="grid-view">
+						<tbody id="steps-table-list">
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Given I click Forecasting and then Liquidity Risk Subtab from the Main Menu</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">When I select Setup from Liquidity Risk breadcrumb</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Then I am on the Forecasting Liquidity Risk Setup page</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Given the "&lt;Category&gt;" category is non editable</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Given "&lt;Category&gt;" category is expanded by default</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Then the respective "&lt;SubCategory&gt;" subcategory is displayed under "&lt;Category&gt;"</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Given the "&lt;SubCategory&gt;" subcategory is displayed under Additional Sources</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">When I select "&lt;SubCategory&gt;" from the Additional Sources category</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">When I make selections in the Accounts field for the subcategory</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Then the Select Limit Accounts section displays below the Accounts field</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Given Unfunded Loan Commitments subcategory is displayed under Funding Needs</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">When I select the "Unfunded Loan Commitments" subcategory</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Then the Account field contains a Dropdown</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Then I can select only one account from the Dropdown</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">When I edit any subcategory on the Forecasting Liquidity Risk Setup page</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">When I click the Save button</a>
+								</td>
+							</tr>
+							<tr class="gridline" onclick="loadStepDefinition(this);">
+								<td>
+									<a href="#">Then the changes are reflected on Liquidity Risk Detail page</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</data>
+	</body>
+</html>
