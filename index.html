@@ -12,51 +12,51 @@
         <h1>📚 Living Documentation</h1>
         <p>Stay up-to-date with our comprehensive and always-current documentation.</p>
         <div class="button-grid">
-            <a href="Livingdoc/ALM/LivingDocALM.html" class="btn">
+            <a href="Livingdoc/ALM/LivingDocALM.html" class="btn" data-updated="2026-01-30">
                 <span class="btn-icon">📊</span>
                 <span>ALM</span>
             </a>
-            <a href="Livingdoc/CECL/LivingDocCECL.html" class="btn">
+            <a href="Livingdoc/CECL/LivingDocCECL.html" class="btn" data-updated="2026-02-11">
                 <span class="btn-icon">💼</span>
                 <span>CECL</span>
             </a>
-            <a href="Livingdoc/CustomerPricing/LivingDocPricing.html" class="btn">
+            <a href="Livingdoc/CustomerPricing/LivingDocPricing.html" class="btn" data-updated="2026-03-02">
                 <span class="btn-icon">💰</span>
                 <span>Customer Pricing</span>
             </a>
-            <a href="Livingdoc/CustomerProfitability/LivingDocProfitability.html" class="btn">
+            <a href="Livingdoc/CustomerProfitability/LivingDocProfitability.html" class="btn" data-updated="2026-03-03">
                 <span class="btn-icon">📈</span>
                 <span>Customer Profitability</span>
             </a>
-            <a href="Livingdoc/Forecasting/LivingDocForecasting.html" class="btn">
+            <a href="Livingdoc/Forecasting/LivingDocForecasting.html" class="btn" data-updated="2026-02-06">
                 <span class="btn-icon">📅</span>
                 <span>Forecasting</span>
             </a>
-            <a href="Livingdoc/ReconciliationSummary/LivingDocReconciliationSummary.html" class="btn">
+            <a href="Livingdoc/ReconciliationSummary/LivingDocReconciliationSummary.html" class="btn" data-updated="2026-02-02">
                 <span class="btn-icon">📋</span>
                 <span>Reconciliation Summary</span>
             </a>
-            <a href="Livingdoc/Allocations/LivingDocAllocations.html" class="btn">
+            <a href="Livingdoc/Allocations/LivingDocAllocations.html" class="btn" data-updated="2026-02-02">
                 <span class="btn-icon">🎲</span>
                 <span>Allocations</span>
             </a>
-            <a href="Livingdoc/Reporting/LivingDocReporting.html" class="btn">
+            <a href="Livingdoc/Reporting/LivingDocReporting.html" class="btn" data-updated="2026-02-02">
                 <span class="btn-icon">📑</span>
                 <span>Reporting</span>
             </a>
-            <a href="Livingdoc/HomePageWidgets/LivingDocHome.html" class="btn">
+            <a href="Livingdoc/HomePageWidgets/LivingDocHome.html" class="btn" data-updated="2026-01-30">
                 <span class="btn-icon">🏠</span>
                 <span>Home Page/Widgets</span>
             </a>
-            <a href="Livingdoc/Notifications/LivingDocNotifications.html" class="btn">
+            <a href="Livingdoc/Notifications/LivingDocNotifications.html" class="btn" data-updated="2026-02-02">
                 <span class="btn-icon">📢</span>
                 <span>Notifications</span>
             </a>
-            <a href="Livingdoc/DailyDashboard/LivingDocDailyDashboard.html" class="btn">
+            <a href="Livingdoc/DailyDashboard/LivingDocDailyDashboard.html" class="btn" data-updated="2026-02-02">
                 <span class="btn-icon">🎯</span>
                 <span>Daily Dashboard</span>
             </a>
-            <a href="Livingdoc/LiquidityRisk/LivingDocLiquidityRisk.html" class="btn">
+            <a href="Livingdoc/LiquidityRisk/LivingDocLiquidityRisk.html" class="btn" data-updated="2026-02-04">
                 <span class="btn-icon">💧</span>
                 <span>Liquidity Risk</span>
             </a>
@@ -68,36 +68,32 @@
         </div>
     </div>
     <script>
-        async function loadTileUpdateDates() {
+        function loadTileUpdateDates() {
             const tileLinks = document.querySelectorAll('.button-grid .btn');
 
             for (const tileLink of tileLinks) {
+                const rawDate = tileLink.getAttribute('data-updated');
                 const dateElement = document.createElement('span');
                 dateElement.className = 'btn-date';
-                dateElement.textContent = 'Updated: n/a';
-                tileLink.appendChild(dateElement);
 
-                try {
-                    const response = await fetch(tileLink.getAttribute('href'), {
-                        method: 'HEAD',
-                        cache: 'no-store'
-                    });
+                if (!rawDate) {
+                    dateElement.textContent = 'Updated: n/a';
+                    tileLink.appendChild(dateElement);
+                    continue;
+                }
 
-                    const lastModified = response.headers.get('last-modified');
-                    if (!lastModified) {
-                        continue;
-                    }
-
-                    const formattedDate = new Date(lastModified).toLocaleDateString(undefined, {
+                const parsedDate = new Date(`${rawDate}T00:00:00`);
+                if (Number.isNaN(parsedDate.getTime())) {
+                    dateElement.textContent = `Updated: ${rawDate}`;
+                } else {
+                    dateElement.textContent = `Updated: ${parsedDate.toLocaleDateString(undefined, {
                         year: 'numeric',
                         month: 'short',
                         day: 'numeric'
-                    });
-
-                    dateElement.textContent = `Updated: ${formattedDate}`;
-                } catch (error) {
-                    // If metadata can't be read, keep the default fallback text.
+                    })}`;
                 }
+
+                tileLink.appendChild(dateElement);
             }
         }
 
