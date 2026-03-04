@@ -1,6 +1,7 @@
 param(
     [string]$IndexPath = "index.html",
-    [switch]$Apply
+    [switch]$Apply,
+    [switch]$Check
 )
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
@@ -41,6 +42,16 @@ $updatedContent = [regex]::Replace($indexContent, $tilePattern, {
 
 if ($updatedTileTags.Count -eq 0) {
     Write-Output "No tiles were matched in $IndexPath."
+    exit 0
+}
+
+if ($Check) {
+    if ($updatedContent -ne $indexContent) {
+        Write-Output "Tile dates are out of date in $IndexPath. Run: pwsh -File .\\docs\\refresh-tile-dates.ps1 -Apply"
+        exit 1
+    }
+
+    Write-Output "Tile dates are up to date in $IndexPath"
     exit 0
 }
 

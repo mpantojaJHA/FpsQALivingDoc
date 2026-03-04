@@ -41,3 +41,26 @@ Apply directly to `index.html`:
 ```powershell
 pwsh -File .\docs\refresh-tile-dates.ps1 -Apply
 ```
+
+Check only (no file changes, exits non-zero if stale):
+
+```powershell
+pwsh -File .\docs\refresh-tile-dates.ps1 -Check
+```
+
+### Run automatically on commit (Git hook)
+
+This repo includes a versioned pre-commit hook at `.githooks/pre-commit`.
+
+Enable it once per local clone:
+
+```powershell
+git config core.hooksPath .githooks
+```
+
+After this, each `git commit` will:
+
+- run `docs/refresh-tile-dates.ps1 -Apply`
+- stage `index.html` automatically
+
+This repo also includes `.githooks/pre-push`, which runs `docs/refresh-tile-dates.ps1 -Check` and blocks push if tile dates are stale.
