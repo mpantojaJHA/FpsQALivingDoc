@@ -67,5 +67,41 @@
             <h3>Produced from ReqNRoll - Expressium</h3>
         </div>
     </div>
+    <script>
+        async function loadTileUpdateDates() {
+            const tileLinks = document.querySelectorAll('.button-grid .btn');
+
+            for (const tileLink of tileLinks) {
+                const dateElement = document.createElement('span');
+                dateElement.className = 'btn-date';
+                dateElement.textContent = 'Updated: n/a';
+                tileLink.appendChild(dateElement);
+
+                try {
+                    const response = await fetch(tileLink.getAttribute('href'), {
+                        method: 'HEAD',
+                        cache: 'no-store'
+                    });
+
+                    const lastModified = response.headers.get('last-modified');
+                    if (!lastModified) {
+                        continue;
+                    }
+
+                    const formattedDate = new Date(lastModified).toLocaleDateString(undefined, {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric'
+                    });
+
+                    dateElement.textContent = `Updated: ${formattedDate}`;
+                } catch (error) {
+                    // If metadata can't be read, keep the default fallback text.
+                }
+            }
+        }
+
+        loadTileUpdateDates();
+    </script>
 </body>
 </html>

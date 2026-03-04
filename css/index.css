@@ -67,6 +67,14 @@ p {
     margin-bottom: 4px;
 }
 
+.btn-date {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.58rem;
+    font-weight: 500;
+    opacity: 0.85;
+}
+
 .btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
@@ -135,6 +143,10 @@ body.standalone .btn {
 body.standalone .btn-icon {
     font-size: 1.6rem;
     margin-bottom: 6px;
+}
+
+body.standalone .btn-date {
+    font-size: 0.68rem;
 }
 
 body.standalone .features {
