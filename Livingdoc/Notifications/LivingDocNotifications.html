@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-	<!-- Expressium LivingDoc Version: 1.1.8.0 -->
+	<!-- Microsoft Windows 10.0.26100 -->
+	<!-- Expressium LivingDoc 1.4.0.0 -->
+	<!-- Reqnroll 3.3.4 -->
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,165 +10,185 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 		<style>
-    @property --passed-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #48A84F;
-    }
+    :root {
 
-    @property --incomplete-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #F5BB00;
-    }
+        /* Grayscale */
+        --bs-gray-075: #fafbfc;
+        --bs-gray-150: #f3f4f6;
+        --bs-gray-450: #bec5cc;
+        --bs-gray-550: #8d959d;
+        --bs-gray-650: #5b636a;
+        --bs-gray-900: #111827; /* Override Bootstrap #212529; */
+        
+        /* Header */
+        --header-bg-color: #cfdbea;
 
-    @property --failed-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #EB4431;
-    }
+        /* Footer */
+        --footer-text-color: var(--bs-gray-600);
+        --footer-bg-color: var(--bs-gray-100);
 
-    @property --skipped-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #A9A9A9;
-    }
+        /* Navigation */
+        --navigation-bg-color: var(--bs-gray-150);
+        --navigation-underline-color: var(--bs-gray-550);
 
-    @property --total-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: black;
-    }
+        /* Tables */
+        --table-header-text-color: var(--bs-gray-900);
+        --table-header-bg-color: var(--bs-gray-150);
+        --table-header-border-color: white;
 
-    @property --passed-background-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #E5F4E6;
-    }
+        /* Tags */
+        --tag-text-color: #338689;
+        --tag-bg-color: #eef4f8;
 
-    @property --incomplete-background-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #FFF6D6;
-    }
+        /* Groups */
+        --group-bg-color: var(--bs-gray-075); 
+        --group-border-color: var(--bs-gray-300);
 
-    @property --failed-background-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #FBE6E3;
-    }
+        /* Outlines */
+        --grid-border-color: #E0E0E0;
+        --splitter-border-color: #ddd;
 
-    @property --skipped-background-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #F0F0F0;
-    }
+        /* Surfaces */
+        --hover-bg-color: #F5F8FC;
+        --selected-bg-color: #EDF3F9;
 
-    @property --passed-text-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #2B672F;
-    }
+        /* Texts */
+        --text-color: var(--bs-gray-900);
+        --heading-text-color: var(--bs-gray-900);
+        --text-dimgray-color: var(--bs-gray-700);
+        --text-darkgray-color: var(--bs-gray-650);
+        --text-gray-color: var(--bs-gray-600);
+        --keyword-text-color: #25576b;  /* #25576b; */
+        --link-text-color: #295f75;     /* #2a6785; */
 
-    @property --incomplete-text-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #7A5E00;
-    }
+        /* Badges */
+        --scenario-index-text-color: #ffffff;
+        --scenario-index-bg-color: #909090;
 
-    @property --failed-text-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #99271E;
-    }
+        /* Buttons */
+        --button-border-color: var(--bs-gray-500);
+        --button-bg-color: var(--bs-gray-100);
+        --button-text-color: var(--bs-gray-900);
+        --button-inactive-border-color: var(--bs-gray-450);
+        --button-inactive-bg-color: var(--bs-gray-100);
+        --button-inactive-text-color: var(--bs-gray-600);
+        --button-hover-border-color: var(--bs-gray-550);
+        --button-hover-bg-color: var(--bs-gray-150);
+        --button-selected-bg-color: #EDF3F9;
 
-    @property --skipped-text-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #000000;
-    }
+        /* Scrollbars */
+        --scrollbar-text-color: #909090;
+        --scrollbar-bg-color: white;
 
-    @property --keyword-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #2F6795;
-        initial-value: #2D638F;
-    }
+        /* Status colors */
+        --passed-color: #47A64E;
+        --incomplete-color: #F7C21A;
+        --failed-color: #E84330;
+        --skipped-color: #A9A9A9;
+        --total-color: #000000;
 
-    @property --hover-color {
-        syntax: "<color>";
-        inherits: false;
-        initial-value: #C7D9E9;
-        initial-value: #d9e5f0;
+        /* Status backgrounds */
+        --passed-bg-color: #E2F5E3;
+        --incomplete-bg-color: #FFF6D0;
+        --failed-bg-color: #FCE4E0;
+        --skipped-bg-color: #F2F2F2;
+
+        /* Status text */
+        --passed-text-color: #2B672F;
+        --incomplete-text-color: #7A5E00;
+        --failed-text-color: #99271E;
+        --skipped-text-color: #333333;
     }
-  
+   
     body, html {
         height: 100%;
         margin: 0;
         overflow: hidden;
+        font-size: 16px;
+        color: var(--text-color);
         /* font-family: system-ui, "Segoe UI Variable Small", "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
     }
+   
+    header {
+        padding: 0.50em 1.00em;
+        background-color: var(--header-bg-color);
+    }
 
-    #content-wrapper {
+    .project-name {
+        font-size: 1.375em;
+        font-weight: bold;
+    }
+
+    .project-date {
+        color: var(--text-dimgray-color);      
+        padding-left: 2px;
+    }
+
+    .navigation {
+        padding: 0.50em 1.00em;
+        background-color: var(--navigation-bg-color);
+        border-bottom: 1px solid var(--splitter-border-color);
+    }
+
+    a.navigation-link {
+        color: var(--text-color);
+        position: relative;
+        padding-left: 1px;
+        padding-right: 1px;
+        margin-right: 12px;
+        font-size: 1.0625em;
+        text-decoration: none; /* remove default underline */
+    }
+
+    a.navigation-link.active {
+        font-weight: 600;
+        font-size: 1.125em;
+    }
+
+    a.navigation-link.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.60em; /* adjust spacing under text */
+        width: 100%;
+        height: 2px;  /* thickness of line */
+        background-color: var(--navigation-underline-color);
+    }
+
+    .splitter-wrapper {
         display: flex;
-        height: calc(100% - 156px); /* Adjust for header and footer height */
+        height: calc(100% - 9.75em); /* Adjust for header and footer height */
         flex-direction: row; /* Change to row for vertical splitter */
+        border-bottom: 1px solid var(--splitter-border-color);
     }
 
     #splitter {
         width: 2px;
-        background: #ddd;
+        background: var(--splitter-border-color);
         cursor: col-resize;
     }
 
-    #left-section {
+    #splitter-left {
         flex: 1;
         overflow: hidden;
-        scrollbar-color: #909090 #F8F9FA;
+        scrollbar-color: var(--scrollbar-text-color) var(--scrollbar-bg-color);
     }
 
-    #right-section {
+    #splitter-right {
         flex: 1;
         overflow: auto;
-        scrollbar-color: #909090 #F8F9FA;
-    }
-
-    #list-view {
-        flex: 1;
-        overflow: auto;
-        height: calc(100% - 68px); /* Adjust for filter and search height */
-    }
-
-    header {
-        padding: 8px;
-        padding-left: 16px;
-        background-color: #C7D9E9;
+        scrollbar-color: var(--scrollbar-text-color) var(--scrollbar-bg-color);
     }
 
     footer {
-        background-color: #f1f1f1;
-        color: #555;
+        background-color: var(--footer-bg-color);
         text-align: center;
-        padding: 10px;
+        padding: 0.50em;
+    }
+
+    footer a {
+        color: var(--footer-text-color);
         font-size: 0.875em;
-    }
-
-    .navigation {
-        background-color: #787878;
-        color: white;
-        padding: 8px 16px;
-    }
-
-    a.navigation-link {
-        color: white;
-        position: relative;
-        padding-left: 1px;
-        padding-right: 1px;
-    }
-
-    a.navigation-active {
-        font-weight: 600;
-        font-size: 1.0625em;
     }
 
     .section {
@@ -195,163 +217,199 @@
     }
 
     .filter-group {
-        background-color: #f1f1f1;
-        padding: 8px;
+        background-color: var(--group-bg-color);
+        padding: 0.5em;
+        margin-top: 0.125em;
+        margin-bottom: 0.50em;
         align-items: center;
+        border-radius: 1.25em;
+        border: 1px solid var(--group-border-color);
     }
 
-    .filter-group-text {
+    .filter-symbol {
         padding-left: 4px;
-        padding-right: 4px;
-        color: gray;
+        padding-right: 6px;
+        color: var(--text-gray-color);
     }
 
-    .filter-group-input {
+    .filter-keywords {
         width: 100%;
         box-sizing: border-box;
         border-width: 1px;
         outline: none;
-        background-color: #f1f1f1;
+        background-color: var(--group-bg-color);
         border: hidden;
     }
 
+    #filter-list {
+        flex: 1;
+        overflow: auto;
+        height: calc(100% - 4.75em); /* Adjust for filter and search height */
+        /* margin-top: 0.50em; */
+        padding-right: 0.375em;
+    }
+
     th, td {
-        padding-left: 4px;
-        padding-right: 4px;
-        padding-top: 3px;
-        padding-bottom: 3px;
+        padding: 4px 4px;
     }
 
     th {
-        background-color: #787878;
-        color: white;
-        border: solid;
-        border-width: 1px;
+        color: var(--table-header-text-color);
+        background-color: var(--table-header-bg-color);
+        border: 1px solid;
         font-weight: 600;
+        border-color: var(--table-header-border-color);
     }
-
-    table.grid-view,
+    
+    table.list-view,
     table.tree-view {
         border: 1px;
         width: 100%;
     }
 
-    table.grid-view tr:hover,
-    table.tree-view tr:hover {
-        background-color: var(--hover-color);
+    table.list-view tr:hover,
+    table.tree-view tr:hover td.grid-border {
+        background-color: var(--hover-bg-color);
     }
 
-    table.grid-view th,
-    table.grid-view td {
+    table.list-view th,
+    table.list-view td {
         padding-left: 6px;
         padding-right: 6px;
     }
 
-    table.tree-view th,
     table.tree-view td {
         padding-left: 2px;
-        padding-right: 4px;
+        padding-right: 2px;
+    }
+    
+    table.tree-view tr.active td.grid-border {
+        background-color: var(--selected-bg-color);
+    }
+
+    table.list-view tr.active {
+        background-color: var(--selected-bg-color);
+    }
+
+    /* Buttons */
+    button {
+        color: var(--button-text-color);
+        border: 1px solid var(--button-border-color);
+        background-color: var(--button-bg-color);
+        border-radius: 0.375em;
+        padding: 2px 6px;
+    }
+
+    /* Hover Buttons */
+    button:hover {
+        color: var(--button-text-color);
+        border: 1px solid var(--button-hover-border-color);
+        background-color: var(--button-hover-bg-color);
+    }
+
+    /* Inactive Option Buttons */
+    button.filter-option:not(.active) {
+        color: var(--button-inactive-text-color);
+        border: 1px solid var(--button-inactive-border-color);
+        background-color: var(--button-inactive-bg-color);
+    }
+
+    /* Hover Option Buttons */
+    button.filter-option:hover {
+        color: var(--button-text-color);
+        border: 1px solid var(--button-hover-border-color);
+        background-color: var(--button-selected-bg-color);
+    }
+
+    /* Active Option Buttons */
+    button.filter-option.active {
+        color: var(--button-text-color);
+        border: 1px solid var(--button-border-color);
+        background-color: var(--button-selected-bg-color);
     }
 
     .grid-folder {
-        font-size: 0.9375em;
-        padding: 2px;
         text-align: center;
+        width: 1.5em;
     }
 
-    button {
-        border: 1px solid black;
-        color: black;
+    .grid-folder-name {
+        color: var(--text-gray-color);
+        font-weight: 500;
     }
 
-    button.prefilter {
-        border: 1px solid gray;
-        color: gray;
+    .grid-expand,
+    .grid-collapse,
+    .scenario-stacktraces,
+    .scenario-attachments,
+    .scenario-backgrounds {
+        padding: 1px 4px;
+        font-size: 0.9625em;
+        color: var(--text-dimgray-color);
     }
 
-    button.prefilter:hover {
-        border: 1px solid black;
-        color: black;
-        background-color: var(--hover-color);
+    .grid-border {
+        border-bottom: 1px solid var(--grid-border-color);
     }
 
-    button.prefilter.active {
-        border: 1px solid black;
-        color: black;
-        background-color: var(--hover-color);
+    .grid-heading {
+        color: var(--link-text-color);
+        font-weight: normal;
     }
 
-    .grid-option {
-        color: dimgray;
-    }
-
-    .gridline {
-        border-bottom: 1px solid lightgray;
-    }
-
-    .gridline-folder {
-        color: dimgray;
-        font-weight: bold;
-    }
-
-    .gridline-heading {
-        color: dimgray;
-        font-weight: bold;
-    }
-
-    .gridline-toggle {
-        color: dimgray;
+    .grid-toggle {
+        color: var(--text-dimgray-color);
         cursor: pointer;
         text-align: center;
+        width: 1.5em;
     }
-
-    .project-name {
-        font-size: 1.40em;
-        font-weight: bold;
-    }
-
-    .project-date {
-        color: dimgray;
-        padding-left: 2px;
+    
+    .grid-indent {
+        width: 1.25em;
     }
 
     .page-name {
-        font-size: 1.40em;
-        font-weight: bold;
+        font-size: 1.375em;
+        font-weight: 600;
         line-height: 1;
-        color: dimgray;
+        color: var(--heading-text-color);
+    }
+
+    .chart-name {
+        font-size: 1.25em;
+        font-weight: 600;
+        line-height: 1.25;
+        color: var(--heading-text-color);
     }
 
     .chart-outline {
         width: fit-content;
         margin: auto;
-        padding: 16px;
-        padding-left: 24px;
-        padding-right: 24px;
-        background-color: whitesmoke;
-    }
-
-    .chart-name {
-        font-size: 1.25em;
-        font-weight: bold;
-        line-height: 1;
-        color: dimgray;
-    }
-
-    .chart-percentage {
-        font-size: 2.25em;
-        line-height: 1.0;
+        padding: 1.5em 2.0em;
+        background-color: var(--group-bg-color);
+        border-radius: 1.00em;
+        border: 1px solid var(--group-border-color);
     }
 
     .chart-status {
-        font-size: 2em;
-        color: gray;
-        line-height: 1.0;
+      width: 160px;
+      height: 164px;
     }
 
-    .chart-bar {
-        height: 0.8em;
-        float: left
+    .chart-number {
+        font-size: 0.5em;
+        text-anchor: middle;
+        transform: translateY(-0.25em);
+    }
+
+    .chart-label {
+        font-size: 0.3125em;
+        text-anchor: middle;
+        transform: translateY(0.7em);
+    }
+
+    .chart-text {
+        transform: translateY(0.15em);
     }
 
     .chart-count {
@@ -375,15 +433,11 @@
 
     .chart-count-bar {
         width: 110px;
-        height: 0.4em;
-    }
-
-    data-item {
-        visibility: hidden;
+        height: 0.475em;
     }
 
     a {
-        color: var(--keyword-color);
+        color: var(--link-text-color);
         text-decoration: none;
     }
 
@@ -442,22 +496,6 @@
         margin-bottom: 0px;
     }
 
-    .chart-text {
-        transform: translateY(0.15em);
-    }
-
-    .chart-number {
-        font-size: 0.5em;
-        text-anchor: middle;
-        transform: translateY(-0.25em);
-    }
-
-    .chart-label {
-        font-size: 0.3em;
-        text-anchor: middle;
-        transform: translateY(0.7em);
-    }
-
     .donut-segment-passed {
         stroke: var(--passed-color);
         fill: transparent;
@@ -482,91 +520,84 @@
         stroke-width: 3.2px;
     }
 
-    textarea {
-        resize: none;
-        width: 100%;
-        padding: 8px;
-        border: 1px solid dimgray;
-    }
-
-    textarea:focus {
-        border-color: black;
-        outline: none;
-    }
-
     hr {
         border: 0 none;
-        margin-top: 6px;
-        margin-bottom: 6px;
+        margin-top: 0.50em;
+        margin-bottom: 0.50em;
     }
 
-    .circle-number {
-        width: 1.5em;
-        height: 1.5em;
-        border-radius: 50%;
-        background-color: #909090;
-        color: white;
-        text-align: center;
-        line-height: 1.5em; /* Centers the text vertically */
-        font-size: 0.875em;
-        display: inline-block; /* Allows the circle to be displayed inline */
-        margin-left: 2px;
+    .feature-tag,
+    .rule-tag,
+    .scenario-tag {
+        color: var(--tag-text-color);
+        background: var(--tag-bg-color);
+        border-radius: 0.375em;
+        padding-top: 3px;
+        padding-bottom: 4px;
+        padding-left: 6px;
+        padding-right: 6px;
+        font-size: 0.9375em;
+        vertical-align: middle;
     }
 
-    .feature-tags,
-    .rule-tags,
-    .scenario-tags {
-        color: #348F91;
+    .feature-tag-group,
+    .rule-tag-group,
+    .scenario-tag-group {
+        padding-bottom: 2px;
     }
 
     .feature-keyword,
     .background-keyword,
     .rule-keyword,
     .scenario-keyword {
-        color: var(--keyword-color);
-        font-weight: bold;
+        color: var(--keyword-text-color);
+        font-weight: 600;
+    }
+
+    .step-keyword {
+        color: var(--keyword-text-color);
+        font-weight: 600;
     }
 
     .feature-name,
     .rule-name,
     .scenario-name {
-        font-weight: bold;
+        font-weight: 600;
     }
 
     .feature-description,
-    .rule-description {
-        font-family: Consolas;
-        font-size: 0.875em;
-        color: gray;
+    .rule-description,
+    .scenario-description {
+        font-size: 0.9375em;
+        color: var(--text-gray-color);
         font-style: italic;
         padding-top: 2px;
     }
 
     .feature-duration,
     .scenario-duration {
-        color: gray;
+        color: var(--text-gray-color);
         padding-left: 4px;
-        padding-right: 4px;
+        padding-right: 5px;
+        font-size: 0.9375em;
     }
 
-    .scenario-stacktraces,
-    .scenario-attachments {
-        color: dimgray;
-        /* padding: 2px; */
-        /* background-color: #F0F0F0; */
-        /* text-align: center; */
-        /* border-radius: 4px;  */
-        /* border: 1px solid lightgray; */
+    .scenario-index {
+        width: 1.70em;
+        height: 1.70em;
+        border-radius: 50%;
+        background-color: var(--scenario-index-bg-color);
+        color: var(--scenario-index-text-color);
+        text-align: center;
+        line-height: 1.70em; /* Centers the text vertically */
+        font-size: 0.850em;
+        display: inline-block; /* Allows the circle to be displayed inline */
+        margin-left: 3px;
     }
 
-    .step-marker {
+    .step-symbol {
         font-weight: bold;
         text-align: center;
-    }
-
-    .step-keyword {
-        color: var(--keyword-color);
-        font-weight: bold;
     }
 
     .scenario-steps {
@@ -584,7 +615,7 @@
     }
 
     .scenario-datatable {
-        color: dimgray;
+        color: var(--text-darkgray-color);
     }
 
     table.scenario-datatable td {
@@ -603,30 +634,34 @@
         word-wrap: break-word;
     }
 
+    .message-header {
+        font-weight: bold;
+    }
+
     .message-passed {
         color: var(--passed-text-color);
-        background-color: var(--passed-background-color);
+        background-color: var(--passed-bg-color);
         padding: 8px;
         border-left: 8px solid var(--passed-color);
     }
 
     .message-failed {
         color: var(--failed-text-color);
-        background-color: var(--failed-background-color);
+        background-color: var(--failed-bg-color);
         padding: 8px;
         border-left: 8px solid var(--failed-color);
     }
 
     .message-incomplete {
         color: var(--incomplete-text-color);
-        background-color: var(--incomplete-background-color);
+        background-color: var(--incomplete-bg-color);
         padding: 8px;
         border-left: 8px solid var(--incomplete-color);
     }
 
     .message-skipped {
         color: var(--skipped-text-color);
-        background-color: var(--skipped-background-color);
+        background-color: var(--skipped-bg-color);
         padding: 8px;
         border-left: 8px solid var(--skipped-color);
     }
@@ -636,9 +671,20 @@
     }
 
     .examples-keyword {
-        font-weight: bold;
-        color: gray;
+        font-weight: 600;
+        color: var(--text-darkgray-color);
         padding-left: 16px;
+    }
+
+    .examples-name {
+        color: var(--text-gray-color);
+    }
+
+    .examples-description {
+        font-size: 0.9375em;
+        color: var(--text-gray-color);
+        font-style: italic;
+        padding-left: 32px;
     }
 
     .examples-datatable {
@@ -650,8 +696,8 @@
     }
 
     .attachments-keyword {
-        font-weight: bold;
-        color: gray;
+        font-weight: 600;
+        color: var(--text-darkgray-color);
         padding-left: 16px;
     }
 
@@ -660,15 +706,81 @@
         padding-bottom: 1px;
     }
 
-    #script-view {
-        flex: 1;
-        overflow: auto;
-        height: calc(100% - 334px); /* Adjust for filter and search height */
+    .duration-symbol {
+        color: var(--text-darkgray-color);
+        font-size: 2.5em;
     }
 
-    #scenario-script {
-        field-sizing: content;
-        height: 96%;
+    .duration-text {
+        font-size: 1.25em;
+        padding-left: 8px;
+        padding-top: 4px;
+        color: var(--text-dimgray-color);
+    }
+
+    .duration-keyword {
+        color: var(--text-dimgray-color);
+    }
+
+    .history-passed {
+        color: var(--passed-text-color);
+        background-color: var(--passed-bg-color);
+        text-align: center;
+        width: 100px;
+    }
+
+    .history-failed {
+        color: var(--failed-text-color);
+        background-color: var(--failed-bg-color);
+        text-align: center;
+        width: 100px;        
+    }
+
+    .history-incomplete {
+        color: var(--incomplete-text-color);
+        background-color: var(--incomplete-bg-color);
+        text-align: center;
+        width: 100px;
+    }
+
+    .history-skipped {
+        color: var(--skipped-text-color);
+        background-color: var(--skipped-bg-color);
+        text-align: center;
+        width: 100px;
+    }
+
+    .history-unknown {
+        text-align: center;
+        width: 100px;
+    }
+
+    .analytics-trends,
+    .analytics-failures {
+        padding-left: 16px;
+        padding-right: 16px;
+        margin: auto;
+    }
+
+    .analytics-list {
+        border: 1px;
+        width: 100%;
+    }
+
+    table.analytics-list th,
+    table.analytics-list td {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+    table.analytics-list td {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+
+    .analytics-list td {
+        border: 1px solid;
+        border-color: var(--table-header-border-color);
     }
 
 		</style>
@@ -679,7 +791,10 @@
             var feature = document.getElementById(featureId).innerHTML;
             var scenario = document.getElementById(scenarioId).innerHTML;
 
-            document.getElementById('right-section').innerHTML = feature + scenario;
+            document.getElementById('splitter-right').innerHTML = feature + scenario;
+
+            clearActiveListItems();
+            x.classList.add('active');
         }
     
 		</script>
@@ -702,19 +817,32 @@
                 }
             }
 
-            document.getElementById('right-section').innerHTML = feature;
+            document.getElementById('splitter-right').innerHTML = feature;
 
-            var rules = document.getElementById('right-section').querySelectorAll('[data-rule-replica]');
+            var rules = document.getElementById('splitter-right').querySelectorAll('[data-rule-replica]');
             for (var i = 0; i < rules.length; i++)
                 rules[i].style.display = "none";
+
+            clearActiveListItems();
+            x.classList.add('active');
+        }
+    
+		</script>
+		<script>
+        function clearActiveListItems() {
+            var table = document.getElementById("table-list");
+            var tr = table.getElementsByTagName("tr");
+            for (var i = 0; i < tr.length; i++) {
+                tr[i].classList.remove('active');
+            }
         }
     
 		</script>
 		<script>
         function loadViewMode(x, y) {
-            var listview = document.getElementById(x).innerHTML;
+            var filterlist = document.getElementById(x).innerHTML;
 
-            document.getElementById('list-view').innerHTML = listview;
+            document.getElementById('filter-list').innerHTML = filterlist;
 
             var exists = document.getElementById('view-title');
             if (exists)
@@ -723,9 +851,9 @@
             var navLinks = document.querySelectorAll('.navigation-link');
             for (var i = 0; i < navLinks.length; i++) {
                 if (navLinks[i].textContent == y)
-                    navLinks[i].classList.add('navigation-active');
+                    navLinks[i].classList.add('active');
                 else
-                    navLinks[i].classList.remove('navigation-active');
+                    navLinks[i].classList.remove('active');
             }
 
             filterView();
@@ -735,28 +863,30 @@
 		</script>
 		<script>
         function loadAnalytics() {
-            var navLinkActive = document.querySelectorAll('a.navigation-link.navigation-active');
+            var navLinkActive = document.querySelectorAll('a.navigation-link.active');
             if (navLinkActive.length > 0) {
                 var name = navLinkActive[0].textContent.toLowerCase();
 
                 if (name == "overview") {
                     var analytics = document.getElementById("analytics-scenarios").innerHTML;
-                    document.getElementById('right-section').innerHTML = analytics;
+                    document.getElementById('splitter-right').innerHTML = analytics;
                 } else {
                     var analytics = document.getElementById("analytics-" + name).innerHTML;
-                    document.getElementById('right-section').innerHTML = analytics;
+                    document.getElementById('splitter-right').innerHTML = analytics;
                 }
             }
             else {
                 var analytics = document.getElementById("analytics-scenarios").innerHTML;
-                document.getElementById('right-section').innerHTML = analytics;
+                document.getElementById('splitter-right').innerHTML = analytics;
             }
+
+            clearActiveListItems();
         }
     
 		</script>
 		<script>
         function filterView() {
-            var navLinkActive = document.querySelectorAll('a.navigation-link.navigation-active');
+            var navLinkActive = document.querySelectorAll('a.navigation-link.active');
             if (navLinkActive.length > 0) {
                 name = navLinkActive[0].textContent.toLowerCase();
 
@@ -1116,100 +1246,6 @@
     
 		</script>
 		<script>
-        function loadEditor() {
-            var editor = document.getElementById('editor-view').innerHTML;
-
-            document.getElementById('left-section').innerHTML = editor;
-            document.getElementById('right-section').remove();
-
-            document.getElementById("scenario-script").value = "";
-            document.getElementById("scenario-script").value += "@TA-??? @Review";
-            document.getElementById("scenario-script").value += "\nScenario: Successfully Creating a new Gherkin Script";
-
-            filterStepDefinitions();
-
-            var navLinks = document.querySelectorAll('.navigation-link');
-            for (var i = 0; i < navLinks.length; i++) {
-                if (navLinks[i].textContent == "Editor")
-                    navLinks[i].classList.add('navigation-active');
-                else
-                    navLinks[i].classList.remove('navigation-active');
-            }
-        }
-    
-		</script>
-		<script>
-        function filterStepDefinitions() {
-            var input = document.getElementById("stepdefinition-filter");
-            var filterTokens = input.value.toUpperCase().split(/\s+/);
-            var table = document.getElementById("steps-table-list");
-            var tr = table.getElementsByTagName("tr");
-
-            var numberOfFound = 0;
-
-            for (var i = 0; i < tr.length; i++) {
-                var td = tr[i].getElementsByTagName("td");
-                var rowText = "";
-                var found = false;
-
-                for (var j = 0; j < td.length; j++) {
-                    rowText += td[j].textContent.toUpperCase() + " ";
-                }
-
-                found = filterTokens.every(token => rowText.includes(token));
-
-                if (found)
-                    numberOfFound++;
-
-                if (numberOfFound >= 6)
-                    found = false;
-
-                tr[i].style.display = found ? "" : "none";
-            }
-        }
-    
-		</script>
-		<script>
-        function loadStepDefinition(row) {
-            var link = row.querySelector("td a");
-            var linkText = link.textContent || link.innerText;
-
-            var script = document.getElementById("scenario-script").value;
-            if (script.endsWith("\n") || script === "") {
-                document.getElementById("scenario-script").value += "    " + linkText;
-            } else {
-                document.getElementById("scenario-script").value += "\n    " + linkText;
-            }
-
-            document.getElementById("stepdefinition-filter").value = "";
-            filterStepDefinitions();
-        }
-    
-		</script>
-		<script>
-        function loadStepDefinitionByEnter() {
-            var table = document.getElementById("steps-table-list");
-            var tr = table.getElementsByTagName("tr");
-
-            for (var i = 0; i < tr.length; i++) {
-                if (tr[i].style.display == "") {
-                    loadStepDefinition(tr[i]);
-                    break;
-                }
-            }
-
-            document.getElementById("stepdefinition-filter").value = "";
-        }
-    
-		</script>
-		<script>
-        function editorCopy() {
-            var copyText = document.getElementById("scenario-script");
-            navigator.clipboard.writeText(copyText.value);
-        }
-    
-		</script>
-		<script>
         function loadCollapse(x) {
             var collapse = x.getAttribute('data-collapse');
             var parent = x.parentElement;
@@ -1315,6 +1351,22 @@
     
 		</script>
 		<script>
+        function toggleBackgrounds(x) {
+            var grandParent = x.parentElement?.parentElement;
+            if (!grandParent) return;
+
+            var attachments = grandParent.getElementsByClassName('backgrounds');
+            for (var i = 0; i < attachments.length; i++) {
+                if (attachments[i].style.display === "none") {
+                    attachments[i].style.display = "block";
+                } else {
+                    attachments[i].style.display = "none";
+                }
+            }
+        }
+    
+		</script>
+		<script>
         function toggleAttachments(x) {
             var grandParent = x.parentElement?.parentElement;
             if (!grandParent) return;
@@ -1347,22 +1399,7 @@
     
 		</script>
 		<script>
-        function editorCopy() {
-            var textArea = document.getElementById("scenario-script");
-            textArea.select();
-            navigator.clipboard.writeText(textArea.value);
-            window.getSelection().removeAllRanges();
-        }
-    
-		</script>
-		<script>
         function onloadFilter() {
-            const viewMode = new URLSearchParams(window.location.search).get('viewMode');
-            if (viewMode == "Editor") { 
-                loadEditor();
-                return;
-            }
-
             const filter = new URLSearchParams(window.location.search).get('filterByKeywords');
             if (!filter) 
                 return;
@@ -1384,7 +1421,7 @@
                             var feature = document.getElementById(featureId).innerHTML;
                             var scenario = document.getElementById(scenarioId).innerHTML;
 
-                            document.getElementById('right-section').innerHTML = feature + scenario;
+                            document.getElementById('splitter-right').innerHTML = feature + scenario;
 
                             break;
                         }
@@ -1396,23 +1433,6 @@
         }
     
 		</script>
-		<script>
-      document.addEventListener("keydown", function (event) {
-        if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "e") {
-          event.preventDefault();
-
-          const url = new URL(window.location.href);
-          url.searchParams.set("viewMode", "Editor");
-
-          window.open(
-            url.toString(),
-            "newwindow",
-            "width=700,height=700,left=100,top=100"
-          );
-        }
-      });
-    
-		</script>
 	</head>
 	<body onload="loadViewMode('project-view','Overview'); loadAnalytics(); onloadFilter()">
 		
@@ -1420,29 +1440,23 @@
 		<header>
 			<span class="project-name">JHA.Profitstars.PSI.Integration.Testing</span>
 			<br>
-			<span class="project-date">Generated Mon 2 Feb 2026 17:42:23 GMT+0</span>
+			<span class="project-date">Generated Tue 7 Apr 2026 at 22:36:45 GMT+0</span>
 		</header>
 		
 		<!-- Project Navigation Section -->
 		<nav class="navigation">
-			<span>|</span>
 			<a class="navigation-link" title="Overview" href="#" onclick="loadViewMode('project-view','Overview');">Overview</a>
-			<span>|</span>
 			<a class="navigation-link" title="Features List View" href="#" onclick="loadViewMode('features-view','Features');">Features</a>
-			<span>|</span>
 			<a class="navigation-link" title="Scenarios List View" href="#" onclick="loadViewMode('scenarios-view','Scenarios');">Scenarios</a>
-			<span>|</span>
 			<a class="navigation-link" title="Steps List View" href="#" onclick="loadViewMode('steps-view','Steps');">Steps</a>
-			<span>|</span>
 			<a class="navigation-link" title="Analytics" href="#" onclick="loadAnalytics()">Analytics</a>
-			<span>|</span>
 		</nav>
 		
-		<!-- Content Wrapper Section -->
-		<div id="content-wrapper">
+		<!-- Splitter Wrapper Section -->
+		<div class="splitter-wrapper">
 			
-			<!-- Left Content Section -->
-			<div id="left-section" class="bg-light p-3">
+			<!-- Left Splitter Section -->
+			<div id="splitter-left" class="bg-white p-3">
 				<div class="section layout-row">
 					
 					<!-- View Title Section -->
@@ -1452,41 +1466,51 @@
 					
 					<!-- PreFilters Section -->
 					<div class="layout-column align-right">
-						<button class="prefilter" data-prefilter="Passed" title="Preset Filter with Passed" onclick="togglePrefilter(this)">Passed</button>
-						<button class="prefilter" data-prefilter="Incomplete" title="Preset Filter with Incomplete" onclick="togglePrefilter(this)">Incomplete</button>
-						<button class="prefilter" data-prefilter="Failed" title="Preset Filter with Failed" onclick="togglePrefilter(this)">Failed</button>
-						<button class="prefilter" data-prefilter="Skipped" title="Preset Filter with Skipped" onclick="togglePrefilter(this)">Skipped</button>
-						<button title="Clear Filters" onclick="clearPrefilters()">Clear</button>
+						<button class="filter-option" data-prefilter="Passed" title="Preset Filter with Passed" onclick="togglePrefilter(this)">
+							<span class="status-dot bgcolor-passed"></span>
+							<span>Passed</span>
+						</button>
+						<button class="filter-option" data-prefilter="Incomplete" title="Preset Filter with Incomplete" onclick="togglePrefilter(this)">
+							<span class="status-dot bgcolor-incomplete filter-option-name"></span>
+							<span>Incomplete</span>
+						</button>
+						<button class="filter-option" data-prefilter="Failed" title="Preset Filter with Failed" onclick="togglePrefilter(this)">
+							<span class="status-dot bgcolor-failed filter-option-name"></span>
+							<span>Failed</span>
+						</button>
+						<button class="filter-option" data-prefilter="Skipped" title="Preset Filter with Skipped" onclick="togglePrefilter(this)">
+							<span class="status-dot bgcolor-skipped filter-option-name"></span>
+							<span>Skipped</span>
+						</button>
+						<button class="selected" title="Clear All Filters" onclick="clearPrefilters()">Clear</button>
 					</div>
 				</div>
 				
 				<!-- Filter Section -->
-				<div class="section">
-					<div class="layout-row filter-group">
-						<div class="filter-group-text">
-							<span class="bi bi-search"></span>
-						</div>
-						<div style="width: 100%">
-							<input onkeyup="filterView()" class="filter-group-input" id="filter-by-keywords" type="text" placeholder="Filter by Keywords">
-						</div>
+				<div class="layout-row filter-group">
+					<div class="filter-symbol">
+						<span class="bi bi-search"></span>
+					</div>
+					<div style="width: 100%">
+						<input onkeyup="filterView()" class="filter-keywords" id="filter-by-keywords" type="text" placeholder="Filter by Keywords">
 					</div>
 				</div>
-				<div id="list-view"></div>
+				<div id="filter-list"></div>
 			</div>
 			
-			<!-- Splitter Content Section -->
+			<!-- Splitter Section -->
 			<div id="splitter"></div>
 			
-			<!-- Right Content Section -->
-			<div id="right-section" class="bg-light p-3">
+			<!-- Right Splitter Section -->
+			<div id="splitter-right" class="bg-white p-3">
 			</div>
 		</div>
 		
 		<!-- Content Splitter Script -->
 		<script>
         const splitter = document.getElementById('splitter');
-        const leftSection = document.getElementById('left-section');
-        const rightSection = document.getElementById('right-section');
+        const splitterLeft = document.getElementById('splitter-left');
+        const splitterRight = document.getElementById('splitter-right');
 
         let isDragging = false;
 
@@ -1500,12 +1524,12 @@
 
             document.body.style.userSelect = 'none';
 
-            const totalWidth = leftSection.offsetWidth + rightSection.offsetWidth + splitter.offsetWidth;
-            const leftWidth = e.clientX - leftSection.getBoundingClientRect().left;
+            const totalWidth = splitterLeft.offsetWidth + splitterRight.offsetWidth + splitter.offsetWidth;
+            const leftWidth = e.clientX - splitterLeft.getBoundingClientRect().left;
 
             if (leftWidth > 50 && leftWidth < totalWidth - 50) {
-                leftSection.style.flex = `0 0 ${leftWidth}px`;
-                rightSection.style.flex = `1 1 auto`;
+                splitterLeft.style.flex = `0 0 ${leftWidth}px`;
+                splitterRight.style.flex = `1 1 auto`;
             }
         });
 
@@ -1519,117 +1543,117 @@
 		
 		<!-- Footer Section -->
 		<footer>
-			©2026 Expressium All Rights Reserved
+			<a title="Expressium LivingDoc on GitHub" href="https://github.com/ExpressiumOSS/Expressium.LivingDoc" target="_blank" rel="noopener noreferrer">Powered by Expressium LivingDoc</a>
 		</footer>
 		<data style="display: none;">
 			
 			<!-- Data Overview -->
-			<div class="data-item" id="project-view">
+			<div id="project-view">
 				<div class="section">
 					<table id="table-grid" class="tree-view">
 						<tbody id="table-list">
 							<tr>
-								<td class="grid-folder" width="16px;">📂</td>
-								<td class="gridline" colspan="9">
-									<span class="gridline-folder">JHA.Profitstars.PSI.Integration.Testing</span>
+								<td class="grid-folder">📂</td>
+								<td class="grid-border" colspan="9">
+									<span class="grid-folder-name">JHA.Profitstars.PSI.Integration.Testing</span>
 								</td>
-								<td class="gridline" style="padding-right: 8px;" colspan="2" align="right">
-									<a class="grid-option bi bi-plus-lg" title="Expand All Features" href="#" onclick="loadExpandAll()"></a>
-									<a class="grid-option bi bi-dash-lg" title="Collapse All Features" href="#" onclick="loadCollapseAll()"></a>
+								<td class="grid-border" colspan="2" align="right">
+									<button class="grid-expand bi bi-plus-lg" title="Expand All Features" onclick="loadExpandAll()"></button>
+									<button class="grid-collapse bi bi-dash-lg" title="Collapse All Features" onclick="loadCollapseAll()"></button>
 								</td>
 							</tr>
 							<tr data-name="Features" data-role="folder">
 								<td></td>
-								<td class="grid-folder" width="16px;">📂</td>
-								<td class="gridline" colspan="9">
-									<span class="gridline-folder">Features</span>
+								<td class="grid-folder">📂</td>
+								<td class="grid-border" colspan="9">
+									<span class="grid-folder-name">Features</span>
 								</td>
-								<td class="gridline" align="right"></td>
+								<td class="grid-border" style="padding-right: 8px;" align="right"></td>
 							</tr>
 							<tr data-name="Features\Shared" data-role="folder">
 								<td></td>
 								<td></td>
-								<td class="grid-folder" width="16px;">📂</td>
-								<td class="gridline" colspan="8">
-									<span class="gridline-folder">Shared</span>
+								<td class="grid-folder">📂</td>
+								<td class="grid-border" colspan="8">
+									<span class="grid-folder-name">Shared</span>
 								</td>
-								<td class="gridline" align="right"></td>
+								<td class="grid-border" style="padding-right: 8px;" align="right"></td>
 							</tr>
 							<tr data-name="Features\Shared\Notifications" data-role="folder">
 								<td></td>
 								<td></td>
 								<td></td>
-								<td class="grid-folder" width="16px;">📂</td>
-								<td class="gridline" colspan="7">
-									<span class="gridline-folder">Notifications</span>
+								<td class="grid-folder">📂</td>
+								<td class="grid-border" colspan="7">
+									<span class="grid-folder-name">Notifications</span>
 								</td>
-								<td class="gridline" align="right"></td>
+								<td class="grid-border" style="padding-right: 8px;" align="right"></td>
 							</tr>
-							<tr data-parent="Features\Shared\Notifications" data-name="00e29f09-4ce1-4015-8086-e06f80d9a792" data-role="feature" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" onclick="loadFeature(this);">
+							<tr data-parent="Features\Shared\Notifications" data-name="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-role="feature" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" onclick="loadFeature(this);">
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
-								<td data-collapse="false" width="16px;" class="gridline-toggle" title="Toggle Feature" onclick="loadCollapse(this);">
+								<td data-collapse="false" class="grid-toggle" title="Toggle Feature" onclick="loadCollapse(this);">
 									<span class="bi bi-chevron-down"></span>
 								</td>
-								<td class="gridline" colspan="6">
-									<span class="status-dot bgcolor-passed"></span>
-									<a class="gridline-heading" href="#">NotificationsGrid</a>
+								<td class="grid-border" colspan="6">
+									<span class="status-dot bgcolor-failed"></span>
+									<a class="grid-heading" href="#">NotificationsGrid</a>
 								</td>
-								<td class="gridline" align="right"></td>
+								<td class="grid-border" align="right"></td>
 							</tr>
-							<tr data-parent="00e29f09-4ce1-4015-8086-e06f80d9a792" data-role="scenario" data-tags="NotificationsGrid Passed  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid  Features/Shared/Notifications/NotificationGrid.feature" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
+							<tr data-parent="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-role="scenario" data-tags="NotificationsGrid Failed  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid  Features/Shared/Notifications/NotificationGrid.feature" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
-								<td width="16px;"></td>
-								<td class="gridline" colspan="5">
-									<span class="status-dot bgcolor-passed"></span>
-									<a href="#">The Subject matches the Detail title</a>
+								<td class="grid-indent"></td>
+								<td class="grid-border" colspan="5">
+									<span class="status-dot bgcolor-failed"></span>
+									<a class="grid-heading" href="#">The Subject matches the Detail title</a>
 								</td>
-								<td class="gridline" align="right"></td>
+								<td class="grid-border" align="right"></td>
 							</tr>
-							<tr data-parent="00e29f09-4ce1-4015-8086-e06f80d9a792" data-role="scenario" data-tags="NotificationsGrid Passed  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid  Features/Shared/Notifications/NotificationGrid.feature" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
+							<tr data-parent="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-role="scenario" data-tags="NotificationsGrid Failed  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid  Features/Shared/Notifications/NotificationGrid.feature" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
-								<td width="16px;"></td>
-								<td class="gridline" colspan="5">
-									<span class="status-dot bgcolor-passed"></span>
-									<a href="#">The Mark as Read button removes the unread bold state</a>
+								<td class="grid-indent"></td>
+								<td class="grid-border" colspan="5">
+									<span class="status-dot bgcolor-failed"></span>
+									<a class="grid-heading" href="#">The Mark as Read button removes the unread bold state</a>
 								</td>
-								<td class="gridline" align="right"></td>
+								<td class="grid-border" align="right"></td>
 							</tr>
-							<tr data-parent="00e29f09-4ce1-4015-8086-e06f80d9a792" data-role="scenario" data-tags="NotificationsGrid Passed  @DEVOPS_WI:760014 @DEVOPS_WI:808237 @shared @notificationsgrid  Features/Shared/Notifications/NotificationGrid.feature" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="922ac28aa8b4b152a224f9bb89c41bd1" onclick="loadScenario(this);">
+							<tr data-parent="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-role="scenario" data-tags="NotificationsGrid Passed  @DEVOPS_WI:760014 @DEVOPS_WI:808237 @shared @notificationsgrid  Features/Shared/Notifications/NotificationGrid.feature" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="922ac28aa8b4b152a224f9bb89c41bd1" onclick="loadScenario(this);">
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
-								<td width="16px;"></td>
-								<td class="gridline" colspan="5">
+								<td class="grid-indent"></td>
+								<td class="grid-border" colspan="5">
 									<span class="status-dot bgcolor-passed"></span>
-									<a href="#">A read notification reduces the bell icon number of unread notifications</a>
+									<a class="grid-heading" href="#">A read notification reduces the bell icon number of unread notifications</a>
 								</td>
-								<td class="gridline" align="right"></td>
+								<td class="grid-border" align="right"></td>
 							</tr>
-							<tr data-parent="00e29f09-4ce1-4015-8086-e06f80d9a792" data-role="scenario" data-tags="NotificationsGrid Passed  @shared @notificationsgrid  Features/Shared/Notifications/NotificationGrid.feature" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
+							<tr data-parent="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-role="scenario" data-tags="NotificationsGrid Passed  @shared @notificationsgrid  Features/Shared/Notifications/NotificationGrid.feature" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
 								<td></td>
-								<td width="16px;"></td>
-								<td class="gridline" colspan="5">
+								<td class="grid-indent"></td>
+								<td class="grid-border" colspan="5">
 									<span class="status-dot bgcolor-passed"></span>
-									<a href="#">ZCleanUpNotifications</a>
+									<a class="grid-heading" href="#">ZCleanUpNotifications</a>
 								</td>
-								<td class="gridline" align="right"></td>
+								<td class="grid-border" align="right"></td>
 							</tr>
 						</tbody>
 					</table>
@@ -1637,9 +1661,9 @@
 			</div>
 			
 			<!-- Data Features View -->
-			<div class="data-item" id="features-view">
+			<div id="features-view">
 				<div class="section">
-					<table id="table-grid" class="grid-view">
+					<table id="table-grid" class="list-view">
 						<thead>
 							<tr data-role="header">
 								<th width="20" class="align-center" onclick="sortTableByColumn(0)"></th>
@@ -1656,17 +1680,17 @@
 							</tr>
 						</thead>
 						<tbody id="table-list">
-							<tr class="gridline" data-role="feature" data-tags="NotificationsGrid " data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" onclick="loadFeature(this);">
+							<tr class="grid-border" data-role="feature" data-tags="NotificationsGrid " data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" onclick="loadFeature(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-failed"></span>
 								</td>
 								<td>
 									<a href="#">NotificationsGrid</a>
 								</td>
 								<td align="center" data-scenarios="0004">4</td>
-								<td align="center" data-completion="0100">100%</td>
-								<td align="center" data-duration="02:43:011">2min 43s</td>
-								<td>Passed</td>
+								<td align="center" data-completion="0050">50%</td>
+								<td align="center" data-duration="02:10:596">2min 10s</td>
+								<td>Failed</td>
 							</tr>
 						</tbody>
 					</table>
@@ -1674,9 +1698,9 @@
 			</div>
 			
 			<!-- Data Scenarios View -->
-			<div class="data-item" id="scenarios-view">
+			<div id="scenarios-view">
 				<div class="section">
-					<table id="table-grid" class="grid-view">
+					<table id="table-grid" class="list-view">
 						<thead>
 							<tr data-role="header">
 								<th width="20" class="align-center" onclick="sortTableByColumn(0)"></th>
@@ -1691,29 +1715,29 @@
 							</tr>
 						</thead>
 						<tbody id="table-list">
-							<tr class="gridline" data-role="scenario" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="scenario" data-tags="Failed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-failed"></span>
 								</td>
 								<td>
 									<a href="#">The Subject matches the Detail title</a>
 								</td>
 								<td align="center" data-order="0001">1</td>
-								<td align="center" data-duration="00:26:535">26s 535ms</td>
-								<td>Passed</td>
+								<td align="center" data-duration="00:37:547">37s 547ms</td>
+								<td>Failed</td>
 							</tr>
-							<tr class="gridline" data-role="scenario" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="scenario" data-tags="Failed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-failed"></span>
 								</td>
 								<td>
 									<a href="#">The Mark as Read button removes the unread bold state</a>
 								</td>
 								<td align="center" data-order="0002">2</td>
-								<td align="center" data-duration="00:39:461">39s 461ms</td>
-								<td>Passed</td>
+								<td align="center" data-duration="00:27:701">27s 701ms</td>
+								<td>Failed</td>
 							</tr>
-							<tr class="gridline" data-role="scenario" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808237 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="922ac28aa8b4b152a224f9bb89c41bd1" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="scenario" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808237 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="922ac28aa8b4b152a224f9bb89c41bd1" onclick="loadScenario(this);">
 								<td align="center">
 									<span class="status-dot bgcolor-passed"></span>
 								</td>
@@ -1721,10 +1745,10 @@
 									<a href="#">A read notification reduces the bell icon number of unread notifications</a>
 								</td>
 								<td align="center" data-order="0003">3</td>
-								<td align="center" data-duration="01:03:366">1min 3s</td>
+								<td align="center" data-duration="00:27:075">27s 075ms</td>
 								<td>Passed</td>
 							</tr>
-							<tr class="gridline" data-role="scenario" data-tags="Passed NotificationsGrid  @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="scenario" data-tags="Passed NotificationsGrid  @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
 								<td align="center">
 									<span class="status-dot bgcolor-passed"></span>
 								</td>
@@ -1732,7 +1756,7 @@
 									<a href="#">ZCleanUpNotifications</a>
 								</td>
 								<td align="center" data-order="0004">4</td>
-								<td align="center" data-duration="00:33:648">33s 648ms</td>
+								<td align="center" data-duration="00:38:271">38s 271ms</td>
 								<td>Passed</td>
 							</tr>
 						</tbody>
@@ -1741,9 +1765,9 @@
 			</div>
 			
 			<!-- Data Steps View -->
-			<div class="data-item" id="steps-view">
+			<div id="steps-view">
 				<div class="section">
-					<table id="table-grid" class="grid-view">
+					<table id="table-grid" class="list-view">
 						<thead>
 							<tr data-role="header">
 								<th width="20" class="align-center" onclick="sortTableByColumn(0)"></th>
@@ -1756,117 +1780,117 @@
 							</tr>
 						</thead>
 						<tbody id="table-list">
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Failed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-failed"></span>
 								</td>
 								<td>
 									<a href="#">Given I have at least three Notifications</a>
 								</td>
 								<td align="center" data-count="0004">4</td>
-								<td>Passed</td>
+								<td>Failed</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">And I select the Notification bell in the Banner Bar</a>
 								</td>
 								<td align="center" data-count="0004">4</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">And I am on the Notifications Grid page</a>
 								</td>
 								<td align="center" data-count="0005">5</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">When I click on a notification</a>
 								</td>
 								<td align="center" data-count="0001">1</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">And I read the text from the subject cell</a>
 								</td>
 								<td align="center" data-count="0001">1</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">Then The text matches the header from the detail panel</a>
 								</td>
 								<td align="center" data-count="0001">1</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="051a9425de13be5293cf6f84d40370b9" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">And the detail contains a link to the item if applicable</a>
 								</td>
 								<td align="center" data-count="0001">1</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">When I click on two unread notifications</a>
 								</td>
 								<td align="center" data-count="0001">1</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">And I click the Mark as Read button</a>
 								</td>
 								<td align="center" data-count="0002">2</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">Then The notifications are set to read</a>
 								</td>
 								<td align="center" data-count="0002">2</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Skipped NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="92b3c823eb4ae85495bac670d54aa76c" onclick="loadScenario(this);">
 								<td align="center">
-									<span class="status-dot bgcolor-passed"></span>
+									<span class="status-dot bgcolor-skipped"></span>
 								</td>
 								<td>
 									<a href="#">And the unread notifications are reduced by the number of read notifications</a>
 								</td>
 								<td align="center" data-count="0001">1</td>
-								<td>Passed</td>
+								<td>Skipped</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808237 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="922ac28aa8b4b152a224f9bb89c41bd1" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808237 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="922ac28aa8b4b152a224f9bb89c41bd1" onclick="loadScenario(this);">
 								<td align="center">
 									<span class="status-dot bgcolor-passed"></span>
 								</td>
@@ -1876,7 +1900,7 @@
 								<td align="center" data-count="0001">1</td>
 								<td>Passed</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808237 @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="922ac28aa8b4b152a224f9bb89c41bd1" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Passed NotificationsGrid  @DEVOPS_WI:760014 @DEVOPS_WI:808237 @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="922ac28aa8b4b152a224f9bb89c41bd1" onclick="loadScenario(this);">
 								<td align="center">
 									<span class="status-dot bgcolor-passed"></span>
 								</td>
@@ -1886,7 +1910,7 @@
 								<td align="center" data-count="0001">1</td>
 								<td>Passed</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Passed NotificationsGrid  @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
 								<td align="center">
 									<span class="status-dot bgcolor-passed"></span>
 								</td>
@@ -1896,7 +1920,7 @@
 								<td align="center" data-count="0001">1</td>
 								<td>Passed</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Passed NotificationsGrid  @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
 								<td align="center">
 									<span class="status-dot bgcolor-passed"></span>
 								</td>
@@ -1906,7 +1930,7 @@
 								<td align="center" data-count="0001">1</td>
 								<td>Passed</td>
 							</tr>
-							<tr class="gridline" data-role="step" data-tags="Passed NotificationsGrid  @shared @notificationsgrid" data-featureid="00e29f09-4ce1-4015-8086-e06f80d9a792" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
+							<tr class="grid-border" data-role="step" data-tags="Passed NotificationsGrid  @shared @notificationsgrid" data-featureid="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1" data-scenarioid="e33c364d0309b15686545d96074c4672" onclick="loadScenario(this);">
 								<td align="center">
 									<span class="status-dot bgcolor-passed"></span>
 								</td>
@@ -1922,19 +1946,18 @@
 			</div>
 			
 			<!-- Data Feature -->
-			<div class="data-item" id="00e29f09-4ce1-4015-8086-e06f80d9a792">
+			<div id="6e976b9f-642d-4c18-b0a3-c2571c1ac9c1">
 				
 				<!-- Feature Section -->
 				<div class="section">
 					
 					<!-- Data Feature Tags -->
-					<div>
-						<span class="feature-tags"></span>
+					<div class="feature-tag-group">
 					</div>
 					
 					<!-- Data Feature Name -->
 					<div>
-						<span class="status-dot bgcolor-passed"></span>
+						<span class="status-dot bgcolor-failed"></span>
 						<span class="feature-keyword">Feature:
 						</span>
 						<span class="feature-name">NotificationsGrid</span>
@@ -1978,60 +2001,111 @@
 			</div>
 			
 			<!-- Data Scenario -->
-			<div class="data-item" id="051a9425de13be5293cf6f84d40370b9">
+			<div id="051a9425de13be5293cf6f84d40370b9">
 				
 				<!-- Scenario Section -->
 				<div class="section" style="width: fit-content; max-width: 98%">
 					
 					<!-- Data Scenario Tags -->
-					<div>
-						<span class="scenario-tags">@DEVOPS_WI:760014 @DEVOPS_WI:808208 @shared @notificationsgrid</span>
+					<div class="scenario-tag-group">
+						<span class="scenario-tag">@DEVOPS_WI:760014</span>
+						<span class="scenario-tag">@DEVOPS_WI:808208</span>
+						<span class="scenario-tag">@shared</span>
+						<span class="scenario-tag">@notificationsgrid</span>
 					</div>
 					
 					<!-- Data Scenario Name -->
 					<div>
-						<span class="status-dot bgcolor-passed"></span>
+						<span class="status-dot bgcolor-failed"></span>
 						<span class="scenario-keyword">Scenario:
 						</span>
 						<span class="scenario-name">The Subject matches the Detail title</span>
-						<span class="scenario-duration">26s 535ms</span>
+						<span class="scenario-duration">37s 547ms</span>
+						<button class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></button>
 					</div>
 					
 					<!-- Data Scenario Steps -->
 					<div>
 						<ul class="scenario-steps">
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-failed">✗</span>
 								<span class="step-keyword">Given</span>
 								<span class="step-name">I have at least three Notifications</span>
 							</li>
+							
+							<!-- Data Step Message -->
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<div class="message-box">
+									<div class="message-failed">
+										<span class="message-header">Exception</span>
+										<br>
+										WaitForCondition failed.<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<span class="message-header">Stacktrace</span>
+										<br>
+										<div class="message-stacktrace">
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.WaitForCondition(Func`1 expectedCondition, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 592
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.WaitForElementToBeVisible(String selector, Nullable`1 elementIndex, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 530
+											<br>
+											at JHA.ProfitStars.PSI.UIAutomation.PageObjects.Reporting.ViewReportsPageObject.DeleteAllReports() in D:\a\1\s\JHA.ProfitStars.PSI.UIAutomation\PageObjects\Reporting\ViewReportsPageObject.cs:line 83
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Shared.Notifications.NotificationsGridStep.GivenIHaveAtLeastThreeNotifications() in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Shared\Notifications\NotificationsGridStep.cs:line 47
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I select the Notification bell in the Banner Bar</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I am on the Notifications Grid page</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">When</span>
 								<span class="step-name">I click on a notification</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I read the text from the subject cell</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">Then</span>
 								<span class="step-name">The text matches the header from the detail panel</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">the detail contains a link to the item if applicable</span>
 							</li>
@@ -2042,60 +2116,111 @@
 			</div>
 			
 			<!-- Data Scenario -->
-			<div class="data-item" id="92b3c823eb4ae85495bac670d54aa76c">
+			<div id="92b3c823eb4ae85495bac670d54aa76c">
 				
 				<!-- Scenario Section -->
 				<div class="section" style="width: fit-content; max-width: 98%">
 					
 					<!-- Data Scenario Tags -->
-					<div>
-						<span class="scenario-tags">@DEVOPS_WI:760014 @DEVOPS_WI:808232 @shared @notificationsgrid</span>
+					<div class="scenario-tag-group">
+						<span class="scenario-tag">@DEVOPS_WI:760014</span>
+						<span class="scenario-tag">@DEVOPS_WI:808232</span>
+						<span class="scenario-tag">@shared</span>
+						<span class="scenario-tag">@notificationsgrid</span>
 					</div>
 					
 					<!-- Data Scenario Name -->
 					<div>
-						<span class="status-dot bgcolor-passed"></span>
+						<span class="status-dot bgcolor-failed"></span>
 						<span class="scenario-keyword">Scenario:
 						</span>
 						<span class="scenario-name">The Mark as Read button removes the unread bold state</span>
-						<span class="scenario-duration">39s 461ms</span>
+						<span class="scenario-duration">27s 701ms</span>
+						<button class="scenario-stacktraces bi bi-code-slash" title="Toggle Stacktrace" onclick="toggleStacktraces(this)"></button>
 					</div>
 					
 					<!-- Data Scenario Steps -->
 					<div>
 						<ul class="scenario-steps">
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-failed">✗</span>
 								<span class="step-keyword">Given</span>
 								<span class="step-name">I have at least three Notifications</span>
 							</li>
+							
+							<!-- Data Step Message -->
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<div class="message-box">
+									<div class="message-failed">
+										<span class="message-header">Exception</span>
+										<br>
+										Wait to be clickable failed for element with selector 'button:has(i.rui-icon-delete)'.<br>
+									</div>
+								</div>
+							</li>
+							
+							<!-- Data Step Message -->
+							<li class="stacktraces" style="display : none;">
+								<div class="message-box">
+									<div class="message-failed">
+										<span class="message-header">Stacktrace</span>
+										<br>
+										<div class="message-stacktrace">
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.WaitForElementToBeClickable(String selector, Nullable`1 elementIndex, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 559
+											<br>
+											at JHA.ProfitStars.PSI.Utils.Helpers.PageFrameHelper.ClickOnElement(String selector, Nullable`1 elementIndex, Int32 timeoutInMilliseconds) in D:\a\1\s\JHA.ProfitStars.PSI.Utils\Helpers\PageFrameHelper.cs:line 285
+											<br>
+											at JHA.ProfitStars.PSI.UIAutomation.PageObjects.Reporting.ViewReportsPageObject.DeleteAllReports() in D:\a\1\s\JHA.ProfitStars.PSI.UIAutomation\PageObjects\Reporting\ViewReportsPageObject.cs:line 78
+											<br>
+											at JHA.Profitstars.PSI.IntegrationTesting.Steps.Shared.Notifications.NotificationsGridStep.GivenIHaveAtLeastThreeNotifications() in D:\a\1\s\JHA.ProfitStars.PSI.IntegrationTesting\Steps\Shared\Notifications\NotificationsGridStep.cs:line 47
+											<br>
+											at Reqnroll.Bindings.AsyncMethodHelper.ConvertTaskOfT(Task task, Boolean getValue)
+											<br>
+											at Reqnroll.Bindings.BindingDelegateInvoker.InvokeDelegateAsync(Delegate bindingDelegate, Object[] invokeArgs, ExecutionContextHolder executionContext)
+											<br>
+											at Reqnroll.Bindings.BindingInvoker.InvokeBindingAsync(IBinding binding, IContextManager contextManager, Object[] arguments, ITestTracer testTracer, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.ExecuteStepMatchAsync(BindingMatch match, Object[] arguments, DurationHolder durationHolder)
+											<br>
+											at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>b__7&gt;d.MoveNext()
+												<br>--- End of stack trace from previous location ---
+												<br>
+												at Reqnroll.Infrastructure.TestExecutionEngine.&lt;&gt;c__DisplayClass57_0.&lt;<executestepasync>g__HandleStepExecutionExceptions|0&gt;d.MoveNext()<br>
+												</executestepasync>
+											</executestepasync>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I select the Notification bell in the Banner Bar</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I am on the Notifications Grid page</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">When</span>
 								<span class="step-name">I click on two unread notifications</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I click the Mark as Read button</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">Then</span>
 								<span class="step-name">The notifications are set to read</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-skipped">✗</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">the unread notifications are reduced by the number of read notifications</span>
 							</li>
@@ -2106,14 +2231,17 @@
 			</div>
 			
 			<!-- Data Scenario -->
-			<div class="data-item" id="922ac28aa8b4b152a224f9bb89c41bd1">
+			<div id="922ac28aa8b4b152a224f9bb89c41bd1">
 				
 				<!-- Scenario Section -->
 				<div class="section" style="width: fit-content; max-width: 98%">
 					
 					<!-- Data Scenario Tags -->
-					<div>
-						<span class="scenario-tags">@DEVOPS_WI:760014 @DEVOPS_WI:808237 @shared @notificationsgrid</span>
+					<div class="scenario-tag-group">
+						<span class="scenario-tag">@DEVOPS_WI:760014</span>
+						<span class="scenario-tag">@DEVOPS_WI:808237</span>
+						<span class="scenario-tag">@shared</span>
+						<span class="scenario-tag">@notificationsgrid</span>
 					</div>
 					
 					<!-- Data Scenario Name -->
@@ -2122,44 +2250,44 @@
 						<span class="scenario-keyword">Scenario:
 						</span>
 						<span class="scenario-name">A read notification reduces the bell icon number of unread notifications</span>
-						<span class="scenario-duration">1min 3s</span>
+						<span class="scenario-duration">27s 075ms</span>
 					</div>
 					
 					<!-- Data Scenario Steps -->
 					<div>
 						<ul class="scenario-steps">
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">Given</span>
 								<span class="step-name">I have at least three Notifications</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I select the Notification bell in the Banner Bar</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I am on the Notifications Grid page</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">When</span>
 								<span class="step-name">I check the select all checkbox on the notifications grid</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I click the Mark as Read button</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">Then</span>
 								<span class="step-name">The notifications are set to read</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">the unread notifications value disappears</span>
 							</li>
@@ -2170,14 +2298,15 @@
 			</div>
 			
 			<!-- Data Scenario -->
-			<div class="data-item" id="e33c364d0309b15686545d96074c4672">
+			<div id="e33c364d0309b15686545d96074c4672">
 				
 				<!-- Scenario Section -->
 				<div class="section" style="width: fit-content; max-width: 98%">
 					
 					<!-- Data Scenario Tags -->
-					<div>
-						<span class="scenario-tags">@shared @notificationsgrid</span>
+					<div class="scenario-tag-group">
+						<span class="scenario-tag">@shared</span>
+						<span class="scenario-tag">@notificationsgrid</span>
 					</div>
 					
 					<!-- Data Scenario Name -->
@@ -2186,44 +2315,44 @@
 						<span class="scenario-keyword">Scenario:
 						</span>
 						<span class="scenario-name">ZCleanUpNotifications</span>
-						<span class="scenario-duration">33s 648ms</span>
+						<span class="scenario-duration">38s 271ms</span>
 					</div>
 					
 					<!-- Data Scenario Steps -->
 					<div>
 						<ul class="scenario-steps">
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">Given</span>
 								<span class="step-name">I have at least three Notifications</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I select the Notification bell in the Banner Bar</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I am on the Notifications Grid page</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">Given</span>
 								<span class="step-name">I select the Notification bell in the Banner Bar</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">And</span>
 								<span class="step-name">I am on the Notifications Grid page</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">When</span>
 								<span class="step-name">I clean up Notifications</span>
 							</li>
 							<li>
-								<span class="step-marker color-passed">✓</span>
+								<span class="step-symbol color-passed">✓</span>
 								<span class="step-keyword">Then</span>
 								<span class="step-name">I also clear Reports</span>
 							</li>
@@ -2234,7 +2363,7 @@
 			</div>
 			
 			<!-- Data Analytics -->
-			<div class="data-item" id="analytics-features">
+			<div id="analytics-features">
 				<div class="section">
 					<span class="page-name" data-testid="page-title">Analytics</span>
 				</div>
@@ -2246,15 +2375,15 @@
 						
 						<!-- Data Analytics Status Chart -->
 						<div class="section" style="text-align: center; margin: auto;">
-							<svg width="160px" height="168px" viewBox="0 0 42 42">
+							<svg class="chart-status" viewBox="0 0 42 42">
 								<g transform="rotate(-90, 21, 21)">
 									<circle class="donut-segment-skipped" cx="21" cy="21" r="15.9155"></circle>
-									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="100 0" stroke-dashoffset="0"></circle>
-									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-100"></circle>
-									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-100"></circle>
+									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="0"></circle>
+									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-0"></circle>
+									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="100 0" stroke-dashoffset="-0"></circle>
 								</g>
 								<g class="chart-text">
-									<text x="50%" y="50%" class="chart-number" data-testid="features-chart-passed">100%</text>
+									<text x="50%" y="50%" class="chart-number" data-testid="features-chart-passed">0%</text>
 									<text x="50%" y="50%" class="chart-label">Passed</text>
 								</g>
 							</svg>
@@ -2264,9 +2393,9 @@
 								<tbody>
 									<tr>
 										<td class="color-passed chart-count">
-											<span class="chart-count-number">1</span>
+											<span class="chart-count-number">0</span>
 											<br>
-											<span class="chart-count-percentage">100%</span>
+											<span class="chart-count-percentage">0%</span>
 											<br>
 											<span class="chart-count-status">Passed</span>
 											<br>
@@ -2282,9 +2411,9 @@
 											<div class="chart-count-bar bgcolor-incomplete"></div>
 										</td>
 										<td class="color-failed chart-count">
-											<span class="chart-count-number">0</span>
+											<span class="chart-count-number">1</span>
 											<br>
-											<span class="chart-count-percentage">0%</span>
+											<span class="chart-count-percentage">100%</span>
 											<br>
 											<span class="chart-count-status">Failed</span>
 											<br>
@@ -2318,17 +2447,17 @@
 				
 				<!-- Data Analytics Duration -->
 				<div style="padding-top: 6px; text-align: center; justify-content: center; align-items: center; display: flex;">
-					<span class="bi bi-stopwatch" style="color: dimgray; font-size: 2.5em;"></span>
-					<span style="font-size: 1.25em; padding-left: 8px; padding-top: 4px;">
-						<span style="color: dimgray;">Duration:
+					<span class="bi bi-stopwatch duration-symbol"></span>
+					<span class="duration-text">
+						<span class="duration-keyword">Duration:
 						</span>
-						<span data-testid="project-duration">3min 12s</span>
+						<span data-testid="project-duration">2min 36s</span>
 					</span>
 				</div>
 			</div>
 			
 			<!-- Data Analytics -->
-			<div class="data-item" id="analytics-scenarios">
+			<div id="analytics-scenarios">
 				<div class="section">
 					<span class="page-name" data-testid="page-title">Analytics</span>
 				</div>
@@ -2340,15 +2469,15 @@
 						
 						<!-- Data Analytics Status Chart -->
 						<div class="section" style="text-align: center; margin: auto;">
-							<svg width="160px" height="168px" viewBox="0 0 42 42">
+							<svg class="chart-status" viewBox="0 0 42 42">
 								<g transform="rotate(-90, 21, 21)">
 									<circle class="donut-segment-skipped" cx="21" cy="21" r="15.9155"></circle>
-									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="100 0" stroke-dashoffset="0"></circle>
-									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-100"></circle>
-									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-100"></circle>
+									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="50 50" stroke-dashoffset="0"></circle>
+									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-50"></circle>
+									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="50 50" stroke-dashoffset="-50"></circle>
 								</g>
 								<g class="chart-text">
-									<text x="50%" y="50%" class="chart-number" data-testid="scenarios-chart-passed">100%</text>
+									<text x="50%" y="50%" class="chart-number" data-testid="scenarios-chart-passed">50%</text>
 									<text x="50%" y="50%" class="chart-label">Passed</text>
 								</g>
 							</svg>
@@ -2358,9 +2487,9 @@
 								<tbody>
 									<tr>
 										<td class="color-passed chart-count">
-											<span class="chart-count-number">4</span>
+											<span class="chart-count-number">2</span>
 											<br>
-											<span class="chart-count-percentage">100%</span>
+											<span class="chart-count-percentage">50%</span>
 											<br>
 											<span class="chart-count-status">Passed</span>
 											<br>
@@ -2376,9 +2505,9 @@
 											<div class="chart-count-bar bgcolor-incomplete"></div>
 										</td>
 										<td class="color-failed chart-count">
-											<span class="chart-count-number">0</span>
+											<span class="chart-count-number">2</span>
 											<br>
-											<span class="chart-count-percentage">0%</span>
+											<span class="chart-count-percentage">50%</span>
 											<br>
 											<span class="chart-count-status">Failed</span>
 											<br>
@@ -2412,17 +2541,17 @@
 				
 				<!-- Data Analytics Duration -->
 				<div style="padding-top: 6px; text-align: center; justify-content: center; align-items: center; display: flex;">
-					<span class="bi bi-stopwatch" style="color: dimgray; font-size: 2.5em;"></span>
-					<span style="font-size: 1.25em; padding-left: 8px; padding-top: 4px;">
-						<span style="color: dimgray;">Duration:
+					<span class="bi bi-stopwatch duration-symbol"></span>
+					<span class="duration-text">
+						<span class="duration-keyword">Duration:
 						</span>
-						<span data-testid="project-duration">3min 12s</span>
+						<span data-testid="project-duration">2min 36s</span>
 					</span>
 				</div>
 			</div>
 			
 			<!-- Data Analytics -->
-			<div class="data-item" id="analytics-steps">
+			<div id="analytics-steps">
 				<div class="section">
 					<span class="page-name" data-testid="page-title">Analytics</span>
 				</div>
@@ -2434,15 +2563,15 @@
 						
 						<!-- Data Analytics Status Chart -->
 						<div class="section" style="text-align: center; margin: auto;">
-							<svg width="160px" height="168px" viewBox="0 0 42 42">
+							<svg class="chart-status" viewBox="0 0 42 42">
 								<g transform="rotate(-90, 21, 21)">
 									<circle class="donut-segment-skipped" cx="21" cy="21" r="15.9155"></circle>
-									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="100 0" stroke-dashoffset="0"></circle>
-									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-100"></circle>
-									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-100"></circle>
+									<circle class="donut-segment-passed" cx="21" cy="21" r="15.9155" stroke-dasharray="50 50" stroke-dashoffset="0"></circle>
+									<circle class="donut-segment-incomplete" cx="21" cy="21" r="15.9155" stroke-dasharray="0 100" stroke-dashoffset="-50"></circle>
+									<circle class="donut-segment-failed" cx="21" cy="21" r="15.9155" stroke-dasharray="7 93" stroke-dashoffset="-50"></circle>
 								</g>
 								<g class="chart-text">
-									<text x="50%" y="50%" class="chart-number" data-testid="steps-chart-passed">100%</text>
+									<text x="50%" y="50%" class="chart-number" data-testid="steps-chart-passed">50%</text>
 									<text x="50%" y="50%" class="chart-label">Passed</text>
 								</g>
 							</svg>
@@ -2452,9 +2581,9 @@
 								<tbody>
 									<tr>
 										<td class="color-passed chart-count">
-											<span class="chart-count-number">28</span>
+											<span class="chart-count-number">14</span>
 											<br>
-											<span class="chart-count-percentage">100%</span>
+											<span class="chart-count-percentage">50%</span>
 											<br>
 											<span class="chart-count-status">Passed</span>
 											<br>
@@ -2470,18 +2599,18 @@
 											<div class="chart-count-bar bgcolor-incomplete"></div>
 										</td>
 										<td class="color-failed chart-count">
-											<span class="chart-count-number">0</span>
+											<span class="chart-count-number">2</span>
 											<br>
-											<span class="chart-count-percentage">0%</span>
+											<span class="chart-count-percentage">7%</span>
 											<br>
 											<span class="chart-count-status">Failed</span>
 											<br>
 											<div class="chart-count-bar bgcolor-failed"></div>
 										</td>
 										<td class="color-skipped chart-count">
-											<span class="chart-count-number">0</span>
+											<span class="chart-count-number">12</span>
 											<br>
-											<span class="chart-count-percentage">0%</span>
+											<span class="chart-count-percentage">43%</span>
 											<br>
 											<span class="chart-count-status">Skipped</span>
 											<br>
@@ -2506,132 +2635,12 @@
 				
 				<!-- Data Analytics Duration -->
 				<div style="padding-top: 6px; text-align: center; justify-content: center; align-items: center; display: flex;">
-					<span class="bi bi-stopwatch" style="color: dimgray; font-size: 2.5em;"></span>
-					<span style="font-size: 1.25em; padding-left: 8px; padding-top: 4px;">
-						<span style="color: dimgray;">Duration:
+					<span class="bi bi-stopwatch duration-symbol"></span>
+					<span class="duration-text">
+						<span class="duration-keyword">Duration:
 						</span>
-						<span data-testid="project-duration">3min 12s</span>
+						<span data-testid="project-duration">2min 36s</span>
 					</span>
-				</div>
-			</div>
-			
-			<!-- Data Editor -->
-			<div class="data-item" id="editor-view">
-				<div class="section">
-					<span class="page-name">Gherkin Script Editor</span>
-				</div>
-				<hr>
-				
-				<!-- Editor Actions Section -->
-				<div class="section layout-row">
-					<div class="layout-column align-left">
-						<span class="chart-name">Scenario</span>
-					</div>
-				</div>
-				<div id="script-view">
-					<textarea id="scenario-script"></textarea>
-				</div>
-				<hr>
-				<div class="section">
-					<span class="chart-name">Step Definitions</span>
-				</div>
-				
-				<!-- Filter Section -->
-				<div class="section">
-					<div class="layout-row filter-group">
-						<div class="filter-group-text">
-							<span class="bi bi-search"></span>
-						</div>
-						<div style="width: 100%">
-							<input class="filter-group-input" onkeydown="Javascript: if (event.keyCode == 13) loadStepDefinitionByEnter();" onkeyup="filterStepDefinitions()" id="stepdefinition-filter" type="text" placeholder="Filter by Keywords">
-						</div>
-					</div>
-				</div>
-				<div class="section">
-					<table id="steps-grid" class="grid-view">
-						<tbody id="steps-table-list">
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">Given I have at least three Notifications</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">Given I select the Notification bell in the Banner Bar</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">And I am on the Notifications Grid page</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">When I click on a notification</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">When I read the text from the subject cell</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">Then The text matches the header from the detail panel</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">Then the detail contains a link to the item if applicable</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">When I click on two unread notifications</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">When I click the Mark as Read button</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">Then The notifications are set to read</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">Then the unread notifications are reduced by the number of read notifications</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">When I check the select all checkbox on the notifications grid</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">Then the unread notifications value disappears</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">Given I am on the Notifications Grid page</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">When I clean up Notifications</a>
-								</td>
-							</tr>
-							<tr class="gridline" onclick="loadStepDefinition(this);">
-								<td>
-									<a href="#">Then I also clear Reports</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</data>
